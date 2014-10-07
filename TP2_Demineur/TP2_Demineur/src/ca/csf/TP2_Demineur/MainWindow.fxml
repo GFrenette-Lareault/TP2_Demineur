@@ -3,5 +3,10 @@
 <?import javafx.scene.layout.BorderPane?>
 	
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.csf.TP2_Demineur.MainWindowController">
-	<!-- TODO Add Nodes -->
+	
+	
+	
+	
+	
+	
 </BorderPane>

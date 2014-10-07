@@ -11,7 +11,7 @@ public class Main extends SimpleFXApplication {
     }
     public void start() {
         try {
-            SimpleFXScene simpleFXScene = new SimpleFXScene(MainWindowController.class.getResource("MainScene.fxml"),
+            SimpleFXScene simpleFXScene = new SimpleFXScene(MainWindowController.class.getResource("MainWindow.fxml"),
                                                             MainWindowController.class.getResource("application.css"),
                                                             new MainWindowController());
             SimpleFXStage simpleFXStage = new SimpleFXStage("My Application", 
