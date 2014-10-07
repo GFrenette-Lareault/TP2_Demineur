@@ -1,15 +1,22 @@
 package ca.csf.TP2_Demineur;
 
+import javafx.fxml.FXML;
 import ca.csf.simpleFx.SimpleFXController;
 
-public class MainWindowController extends SimpleFXController{
-	
+public class MainWindowController extends SimpleFXController {
+
 	private Game game;
-	private Difficulte diffuculte;
-	
-	public MainWindowController(){
+
+	public MainWindowController() {
 		game = new Game();
-		diffuculte= Difficulte.DEBUTANT;
+	}
+
+	public void UpdateGame(){
+		//rederer(game.)
 	}
 	
+	@FXML
+	public void NewGame(){
+		
+	}
 }
