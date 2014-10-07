@@ -1,27 +1,26 @@
 package ca.csf.TP2_Demineur;
 	
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.fxml.FXMLLoader;
+import ca.csf.simpleFx.*;
+import javafx.stage.StageStyle;
 
 
-public class Main extends Application {
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+public class Main extends SimpleFXApplication {
 	
 	public static void main(String[] args) {
-		launch(args);
-	}
+        SimpleFXApplicationLauncher.startSimpleFXApplication(Main.class, args);
+    }
+    public void start() {
+        try {
+            SimpleFXScene simpleFXScene = new SimpleFXScene(MainWindowController.class.getResource("MainScene.fxml"),
+                                                            MainWindowController.class.getResource("application.css"),
+                                                            new MainWindowController());
+            SimpleFXStage simpleFXStage = new SimpleFXStage("My Application", 
+                                                            StageStyle.DECORATED, 
+                                                            simpleFXScene, 
+                                                            this);
+            simpleFXStage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

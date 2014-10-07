@@ -1,5 +1,7 @@
 package ca.csf.TP2_Demineur;
 
-public class MainWindowController {
+import ca.csf.simpleFx.SimpleFXController;
+
+public class MainWindowController extends SimpleFXController{
 	
 }
