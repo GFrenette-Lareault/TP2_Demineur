@@ -12,11 +12,14 @@ public class MainWindowController extends SimpleFXController {
 	}
 
 	public void UpdateGame(){
-		//rederer(game.)
+		//rederer(game.)	
 	}
 	
 	@FXML
 	public void NewGame(){
-		
+		game.newGame(difficulte);
 	}
+	
+	
+	
 }
