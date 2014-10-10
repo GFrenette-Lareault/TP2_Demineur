@@ -17,7 +17,7 @@ public class MainWindowController extends SimpleFXController {
 	
 	@FXML
 	public void NewGame(){
-		game.newGame(difficulte);
+		game.newGame(null);
 	}
 	
 	
