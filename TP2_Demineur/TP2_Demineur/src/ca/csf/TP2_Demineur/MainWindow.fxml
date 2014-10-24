@@ -15,7 +15,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Nouvelle Partie" onAction="#NewGame"/>
+                    <MenuItem mnemonicParsing="false" text="Nouvelle Partie" onAction="#newGame"/>
                         <MenuItem mnemonicParsing="false" text="Quitter" />
                   </items>
                 </Menu>

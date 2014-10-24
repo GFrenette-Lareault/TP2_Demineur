@@ -3,6 +3,7 @@ package ca.csf.TP2_Demineur;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import ca.csf.simpleFx.SimpleFXController;
+import ca.csf.simpleFx.SimpleFXStage;
 
 public class MainWindowController extends SimpleFXController {
 
@@ -18,7 +19,7 @@ public class MainWindowController extends SimpleFXController {
 	}
 
 	@FXML
-	public void NewGame() {
+	public void newGame() {
 		game.newGame();
 
 		gameBoard = new MineButton[difficulty.width()][difficulty.height()];
@@ -30,6 +31,6 @@ public class MainWindowController extends SimpleFXController {
 				gridPane.add(gameBoard[i][j], i, j);
 			}
 		}
+		this.getSimpleFxStage().sizeToScene();
 	}
-
 }
