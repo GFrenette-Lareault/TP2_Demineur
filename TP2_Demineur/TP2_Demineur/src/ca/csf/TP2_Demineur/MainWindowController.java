@@ -3,7 +3,6 @@ package ca.csf.TP2_Demineur;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import ca.csf.simpleFx.SimpleFXController;
-import ca.csf.simpleFx.SimpleFXStage;
 
 public class MainWindowController extends SimpleFXController {
 

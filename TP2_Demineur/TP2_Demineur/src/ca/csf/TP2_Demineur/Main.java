@@ -17,6 +17,7 @@ public class Main extends SimpleFXApplication {
 					new MainWindowController());
 			SimpleFXStage simpleFXStage = new SimpleFXStage("My Application",
 					StageStyle.DECORATED, simpleFXScene, this);
+			simpleFXStage.setResizable(false);
 			simpleFXStage.show();
 		} catch (Exception ex) {
 			ex.printStackTrace();
