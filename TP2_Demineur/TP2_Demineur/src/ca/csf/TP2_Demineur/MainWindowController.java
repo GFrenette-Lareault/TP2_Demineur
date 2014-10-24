@@ -32,4 +32,5 @@ public class MainWindowController extends SimpleFXController {
 		}
 		this.getSimpleFxStage().sizeToScene();
 	}
+
 }
