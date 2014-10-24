@@ -1,10 +1,10 @@
 package ca.csf.TP2_Demineur;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
-public class MineButton extends Button implements EventHandler<MouseEvent> {
+public class MineButton extends ToggleButton implements EventHandler<MouseEvent> {
 
 	private final int xPos;
 	private final int yPos;
@@ -13,6 +13,9 @@ public class MineButton extends Button implements EventHandler<MouseEvent> {
 		xPos = x;
 		yPos = y;
 		this.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
+		this.setHeight(10);
+		this.setWidth(10);
+		
 	}
 
 	public int getxPos() {
