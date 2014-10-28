@@ -16,11 +16,12 @@ public class MainWindowController extends SimpleFXController {
 		game = new Game();
 		difficulty = Difficulty.DEBUTANT;
 	}
-
+	
 	@FXML
 	public void newGame() {
-		game.newGame();
-
+		game.newGame(difficulty);
+		gridPane.getChildren().clear();
+		
 		gameBoard = new MineButton[difficulty.width()][difficulty.height()];
 
 		for (int i = 0; i < difficulty.width(); i++) {
@@ -33,4 +34,19 @@ public class MainWindowController extends SimpleFXController {
 		this.getSimpleFxStage().sizeToScene();
 	}
 
+	@FXML
+	public void setEasy() {
+		difficulty = Difficulty.DEBUTANT;
+		newGame();
+	}
+	@FXML
+	public void setMedium() {
+		difficulty = Difficulty.INTERMEDIAIRE;
+		newGame();
+	}
+	@FXML
+	public void setHard() {
+		difficulty = Difficulty.EXPERT;
+		newGame();
+	}
 }

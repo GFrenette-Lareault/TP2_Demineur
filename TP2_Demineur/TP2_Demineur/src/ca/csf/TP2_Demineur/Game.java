@@ -14,7 +14,7 @@ public class Game {
 	private int nbFlags = 0;
 	private int nbCellsLeft;
 	
-	private Cell[][] cell;
+	private Cell[][] cells;
 	
 	public void newGame(Difficulty difficulty){
 		
@@ -22,7 +22,12 @@ public class Game {
 		this.height = difficulty.height();
 		this.nbMines = difficulty.nbMine();
 		
-		cell = new Cell[height][width];
+		cells = new Cell[height][width];
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				cells[i][j] = new Cell();
+			}
+		}
 		nbCellsLeft = height * width;
 		createMine(nbMines);
 		
@@ -32,10 +37,10 @@ public class Game {
 		int mineLocX = (int) (Math.random() * height);
 		int mineLocY = (int) (Math.random() * width);
 		
-		if(cell[mineLocX][mineLocY].getIsAMine()){
+		if(cells[mineLocX][mineLocY].getIsAMine()){
 			createMine(nbMine);
 		} else {
-			cell[mineLocX][mineLocY].setIsAMine();
+			cells[mineLocX][mineLocY].setIsAMine();
 			assignNearbyMineValue(mineLocX, mineLocY);
 			
 			if(nbMine > 0){
@@ -50,7 +55,7 @@ public class Game {
 			for (int j = mineLocY + 1; j < mineLocY - 1 || j < 0; j--){
 				if(j < width){
 					if(i < height){
-						cell[mineLocX][mineLocY].addNbMinesNear();
+						cells[mineLocX][mineLocY].addNbMinesNear();
 					}
 				}
 			}
@@ -60,10 +65,10 @@ public class Game {
 	
 	private void updateRightClick(int cellPosX, int cellPosY){
 		
-		cell[cellPosX][cellPosY].setCellState();
-		if(cell[cellPosX][cellPosY].getCellState() == 1){
+		cells[cellPosX][cellPosY].setCellState();
+		if(cells[cellPosX][cellPosY].getCellState() == 1){
 			nbFlags++;
-		} else if(cell[cellPosX][cellPosY].getCellState() == 2){
+		} else if(cells[cellPosX][cellPosY].getCellState() == 2){
 			nbFlags--;
 		}
 		
@@ -73,13 +78,13 @@ public class Game {
 	
 	private void updateLeftClick(int cellPosX, int cellPosY){
 		
-		if(!(cell[cellPosX][cellPosY].getIsRevealed() || 
-				cell[cellPosX][cellPosY].getCellState() == 1)){
-			if(cell[cellPosX][cellPosY].getIsAMine()){
+		if(!(cells[cellPosX][cellPosY].getIsRevealed() || 
+				cells[cellPosX][cellPosY].getCellState() == 1)){
+			if(cells[cellPosX][cellPosY].getIsAMine()){
 				//gameover, reveal mines, change image button
 				return;
 				
-			} else if(cell[cellPosX][cellPosY].getNbMinesNear() == 0){
+			} else if(cells[cellPosX][cellPosY].getNbMinesNear() == 0){
 				//call cells nearby.isRevealed
 				//boucle infinie
 				
@@ -94,8 +99,8 @@ public class Game {
 	private void gameOver(){
 		for(int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
-				if(cell[i][j].getIsAMine()){
-					if(cell[i][j].getCellState() == 1){
+				if(cells[i][j].getIsAMine()){
+					if(cells[i][j].getCellState() == 1){
 						//button image = flag + mine
 					} else {
 						//button image = mine
@@ -111,7 +116,7 @@ public class Game {
 		if(nbCellsLeft == nbMines){
 			for(int i = 0; i < height; i++){
 				for(int j = 0; j < width; j++){
-					if(cell[i][j].getIsAMine()){
+					if(cells[i][j].getIsAMine()){
 						//button image flag
 					}
 				}
