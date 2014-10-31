@@ -1,7 +1,10 @@
 package ca.csf.TP2_Demineur;
 
-import ca.csf.simpleFx.*;
 import javafx.stage.StageStyle;
+import ca.csf.simpleFx.SimpleFXApplication;
+import ca.csf.simpleFx.SimpleFXApplicationLauncher;
+import ca.csf.simpleFx.SimpleFXScene;
+import ca.csf.simpleFx.SimpleFXStage;
 
 public class Main extends SimpleFXApplication {
 
