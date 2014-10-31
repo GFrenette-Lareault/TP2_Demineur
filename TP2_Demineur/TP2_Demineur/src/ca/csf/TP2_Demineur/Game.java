@@ -2,8 +2,6 @@ package ca.csf.TP2_Demineur;
 
 import java.lang.Math;
 import java.util.ArrayList;
-
-
 import ca.csf.TP2_Demineur.EventHandler.GameEventHandler;
 
 public class Game {
@@ -11,40 +9,42 @@ public class Game {
 
 	private ArrayList<GameEventHandler> gameEventList = new ArrayList<GameEventHandler>();
 
+	private int width;
+	private int height;
+	private int nbMines;
+	private int nbFlags = 0;
+	private int nbCellsLeft;
+
+	private Cell[][] cells;
+	
 	public Game(GameEventHandler gameEventHandler) {
 
 		this.newGame(Difficulty.DEBUTANT);
 		gameEventList.add(gameEventHandler);
 	}
 
-	private int height;
-	private int width;
-	private int nbMines;
-	private int nbFlags = 0;
-	private int nbCellsLeft;
-
-	private Cell[][] cells;
-
 	public void newGame(Difficulty difficulty) {
 
-		this.width = difficulty.width();
+		//set difficulty and creates a new board
 		this.height = difficulty.height();
+		this.width = difficulty.width();
 		this.nbMines = difficulty.nbMine();
 
-		cells = new Cell[height][width];
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
+		cells = new Cell[width][height];
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
 				cells[i][j] = new Cell();
 			}
 		}
-		nbCellsLeft = height * width;
+		nbCellsLeft = width * height;
 		createMine(nbMines);
 
 	}
 
 	private void createMine(int nbMine) {
-		int mineLocX = (int) (Math.random() * height);
-		int mineLocY = (int) (Math.random() * width);
+		
+		int mineLocX = (int) (Math.random() * width);
+		int mineLocY = (int) (Math.random() * height);
 
 		if (cells[mineLocX][mineLocY].getIsAMine()) {
 			createMine(nbMine);
@@ -62,8 +62,8 @@ public class Game {
 	private void assignNearbyMineValue(int mineLocX, int mineLocY) {
 		for (int i = mineLocX + 1; i < mineLocX - 1 || i < 0; i--) {
 			for (int j = mineLocY + 1; j < mineLocY - 1 || j < 0; j--) {
-				if (j < width) {
-					if (i < height) {
+				if (j < height) {
+					if (i < width) {
 						cells[i][j].addNbMinesNear();
 					}
 				}
@@ -77,18 +77,25 @@ public class Game {
 		if(!(cells[cellPosX][cellPosY].getIsRevealed())){
 			cells[cellPosX][cellPosY].setCellState();
 			if(cells[cellPosX][cellPosY].getCellState() == 1){
-				//Flag
+				for (GameEventHandler gameEvent:gameEventList){
+					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.FLAG);
+				}
 				nbFlags++;
 			} else if(cells[cellPosX][cellPosY].getCellState() == 2){
-				//??
+				for (GameEventHandler gameEvent:gameEventList){
+					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.QUESTION_MARK);
+				}
 				nbFlags--;
 			} else {
-				//Empty
+				for (GameEventHandler gameEvent:gameEventList){
+					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.EMPTY);
+				}
 				
 			}
 		
-			//call cossin a francois avec cell[][].currentCellState
-			//Update Flag #. =>=>=>
+			for (GameEventHandler gameEvent:gameEventList){
+				gameEvent.updateFlag(nbFlags);
+			}
 		}
 	}
 
@@ -101,11 +108,11 @@ public class Game {
 				return;
 
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() == 0) {
-				// call cells nearby.isRevealed
+				// call cells nearby.isRevealed 
 				for (int i = cellPosX + 1; i < cellPosX - 1 || i < 0; i--) {
 					for (int j = cellPosY + 1; j < cellPosY - 1 || j < 0; j--) {
-						if (j < width) {
-							if (i < height) {
+						if (j < height) {
+							if (i < width) {
 								this.updateLeftClick(i, j);
 							}
 						}
@@ -122,31 +129,42 @@ public class Game {
 	}
 
 	public void gameOver() {
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
 				if (cells[i][j].getIsAMine()) {
 					if (cells[i][j].getCellState() == 1) {
-						// button image = flag + mine
+						for (GameEventHandler gameEvent:gameEventList){
+							gameEvent.buttonRightClicked(i, j, ButtonImage.MINE_FLAG);
+						}
 					} else {
-						// button image = mine
+						for (GameEventHandler gameEvent:gameEventList){
+							gameEvent.buttonRightClicked(i, j, ButtonImage.MINE_NORMAL);
+						}
 					}
 				}
 			}
 		}
+		
 
-		// main game button image = loss
+		for (GameEventHandler gameEvent:gameEventList){
+			gameEvent.gameOver();
+		}
 	}
 
 	public void victory() {
 		if (nbCellsLeft == nbMines) {
-			for (int i = 0; i < height; i++) {
-				for (int j = 0; j < width; j++) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
 					if (cells[i][j].getIsAMine()) {
-						// button image flag
+						for (GameEventHandler gameEvent:gameEventList){
+							gameEvent.buttonRightClicked(i, j, ButtonImage.FLAG);
+						}
 					}
 				}
 			}
-			// Victory button image = sunshine smiley of OP
+			for (GameEventHandler gameEvent:gameEventList){
+				gameEvent.victory();
+			}
 		}
 	}
 }
