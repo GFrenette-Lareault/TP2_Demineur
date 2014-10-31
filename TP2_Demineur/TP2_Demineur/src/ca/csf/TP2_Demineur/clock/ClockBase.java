@@ -62,6 +62,15 @@ public abstract class ClockBase {
 		timeline.stop();
 	}
 	
+	public void reset() {
+		setTimeInMiliseconds(0);
+		stop();
+	}
+	
+	public void pause() {
+		timeline.pause();
+	}
+	
 	protected abstract void tick();
 	
 }

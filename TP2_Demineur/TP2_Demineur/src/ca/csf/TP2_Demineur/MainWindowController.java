@@ -34,8 +34,6 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 	@Override
 	public void onTimeChanged(int timeInMilliseconds) {
 		int timeInSeconds = timeInMilliseconds / 1000;
-		//int hours = timeInSeconds / 3600;
-		//int minutes = timeInSeconds / 60 - hours * 60;
 		int seconds = timeInSeconds % 999;
 		timeLabel.setText(String.format("%03d", seconds));
 		
@@ -45,7 +43,7 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 	public void newGame() {
 		game.newGame(difficulty);
 		gridPane.getChildren().clear();
-		
+		clock.reset();
 		gameBoard = new MineButton[difficulty.width()][difficulty.height()];
 
 		for (int i = 0; i < difficulty.width(); i++) {
