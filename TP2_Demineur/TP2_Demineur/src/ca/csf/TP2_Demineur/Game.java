@@ -63,7 +63,7 @@ public class Game {
 		
 	}
 	
-	private void updateRightClick(int cellPosX, int cellPosY){
+	public void updateRightClick(int cellPosX, int cellPosY){
 		
 		cells[cellPosX][cellPosY].setCellState();
 		if(cells[cellPosX][cellPosY].getCellState() == 1){
@@ -76,23 +76,23 @@ public class Game {
 		//Update Flag #.
 	}
 	
-	private void updateLeftClick(int cellPosX, int cellPosY){
+	public void updateLeftClick(int cellPosX, int cellPosY){
 		
 		if(!(cells[cellPosX][cellPosY].getIsRevealed() || 
 				cells[cellPosX][cellPosY].getCellState() == 1)){
 			if(cells[cellPosX][cellPosY].getIsAMine()){
-				//gameover, reveal mines, change image button
+				this.gameOver();
 				return;
 				
 			} else if(cells[cellPosX][cellPosY].getNbMinesNear() == 0){
 				//call cells nearby.isRevealed
-				//boucle infinie
 				
 			} else {
 				//show number of mines nearby i.e. image de 8
 				//number mines vs number of cells left. if 0 then win.
 			}
 			nbCellsLeft--;
+			this.victory();
 		}
 	}
 	
