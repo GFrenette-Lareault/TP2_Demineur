@@ -8,8 +8,8 @@ import ca.csf.TP2_Demineur.clock.ClockEventHandler;
 import ca.csf.simpleFx.SimpleFXController;
 
 public class MainWindowController extends SimpleFXController implements
-		ClockEventHandler, ButtonEventHandler, GameEventHandler{
-	
+		ClockEventHandler, ButtonEventHandler, GameEventHandler {
+
 	private Game game;
 	private Difficulty difficulty;
 	private MineButton gameBoard[][];
@@ -84,14 +84,25 @@ public class MainWindowController extends SimpleFXController implements
 	}
 
 	public void victory() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void gameOver() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	
+	public void buttonRightClicked(int x, int y, ButtonImage image) {
+		
+	}
+
+	public void buttonLeftClicked(int x, int y, ButtonImage image) {
+		
+	}
+
+	public void onFirstClick() {
+		if (clock.getTimeInMiliseconds() == 0) {
+			clock.start();
+		}
+		
+	}
 }

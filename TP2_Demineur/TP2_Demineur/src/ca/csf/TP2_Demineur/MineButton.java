@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 public class MineButton extends ToggleButton implements EventHandler<MouseEvent> {
@@ -20,6 +21,7 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 		setMinHeight(30);
 		setMaxWidth(30);
 		setMaxHeight(30);
+		
 		addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 		buttonEventList.add(buttonEvent);
 	}
@@ -34,11 +36,13 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 
 	@Override
 	public void handle(MouseEvent event) {
-		if (event.isPrimaryButtonDown()) {
+		if (event.getButton() == MouseButton.PRIMARY) {
 			for (ButtonEventHandler buttonEvent:buttonEventList) {
 				buttonEvent.onLeftClick(xPos, yPos);
+				buttonEvent.onFirstClick();
 			}
-		} else if (event.isSecondaryButtonDown()) {
+			setDisable(true);
+		} else if (event.getButton() == MouseButton.SECONDARY) {
 			for (ButtonEventHandler buttonEvent:buttonEventList) {
 				buttonEvent.onRightClick(xPos, yPos);
 			}
