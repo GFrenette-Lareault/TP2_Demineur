@@ -17,6 +17,10 @@ public class MainWindowController extends SimpleFXController implements
 	private MineButton gameBoard[][];
 	@FXML
 	private Label timeLabel;
+	@FXML 
+	private Label flagsCounter;
+	private int nbFlags;
+	
 	private Clock clock;
 
 	@FXML
@@ -56,7 +60,11 @@ public class MainWindowController extends SimpleFXController implements
 				gridPane.add(gameBoard[i][j], i, j);
 			}
 		}
-		this.getSimpleFxStage().sizeToScene();
+		nbFlags = difficulty.nbMine();
+		
+		flagsCounter.setText(String.valueOf(nbFlags)); 
+		
+		getSimpleFxStage().sizeToScene();
 	}
 
 	@FXML
@@ -105,6 +113,9 @@ public class MainWindowController extends SimpleFXController implements
 		if (clock.getTimeInMiliseconds() == 0) {
 			clock.start();
 		}
-		
+	}
+	
+	public void updateFlag(int flags) {
+		nbFlags = flags;
 	}
 }

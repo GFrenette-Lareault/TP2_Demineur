@@ -11,4 +11,6 @@ public interface GameEventHandler {
 	public void buttonRightClicked(int x, int y, ButtonImage image);
 	
 	public void buttonLeftClicked(int x, int y, ButtonImage image);
+	
+	public void updateFlag(int flags);
 }
