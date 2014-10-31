@@ -3,8 +3,10 @@ package ca.csf.TP2_Demineur;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import ca.csf.TP2_Demineur.EventHandler.ButtonEventHandler;
+import ca.csf.TP2_Demineur.EventHandler.ClockEventHandler;
+import ca.csf.TP2_Demineur.EventHandler.GameEventHandler;
 import ca.csf.TP2_Demineur.clock.Clock;
-import ca.csf.TP2_Demineur.clock.ClockEventHandler;
 import ca.csf.simpleFx.SimpleFXController;
 
 public class MainWindowController extends SimpleFXController implements

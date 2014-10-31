@@ -1,4 +1,4 @@
-package ca.csf.TP2_Demineur.clock;
+package ca.csf.TP2_Demineur.EventHandler;
 
 public interface ClockEventHandler {
 

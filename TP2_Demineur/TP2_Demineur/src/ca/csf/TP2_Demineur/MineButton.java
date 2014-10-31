@@ -2,6 +2,7 @@ package ca.csf.TP2_Demineur;
 
 import java.util.ArrayList;
 
+import ca.csf.TP2_Demineur.EventHandler.ButtonEventHandler;
 import javafx.event.EventHandler;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;

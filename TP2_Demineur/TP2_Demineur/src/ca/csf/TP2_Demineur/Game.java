@@ -3,6 +3,8 @@ package ca.csf.TP2_Demineur;
 import java.lang.Math;
 import java.util.ArrayList;
 
+import ca.csf.TP2_Demineur.EventHandler.GameEventHandler;
+
 public class Game{
 
 	private ArrayList<GameEventHandler> gameEventList = new ArrayList<GameEventHandler>();

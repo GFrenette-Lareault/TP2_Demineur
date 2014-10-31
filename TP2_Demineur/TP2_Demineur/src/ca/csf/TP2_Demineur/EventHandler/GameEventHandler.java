@@ -1,4 +1,6 @@
-package ca.csf.TP2_Demineur;
+package ca.csf.TP2_Demineur.EventHandler;
+
+import ca.csf.TP2_Demineur.ButtonImage;
 
 public interface GameEventHandler {
 
