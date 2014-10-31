@@ -84,7 +84,7 @@ public class Game{
 	public void updateLeftClick(int cellPosX, int cellPosY){
 		
 		if(!(cells[cellPosX][cellPosY].getIsRevealed() || 
-				cells[cellPosX][cellPosY].getCellState() >= 1)){
+				cells[cellPosX][cellPosY].getCellState() == 1)){
 			if(cells[cellPosX][cellPosY].getIsAMine()){
 				this.gameOver();
 				return;
