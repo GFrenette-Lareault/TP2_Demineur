@@ -1,20 +1,44 @@
 package ca.csf.TP2_Demineur;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import ca.csf.TP2_Demineur.clock.Clock;
+import ca.csf.TP2_Demineur.clock.ClockEventHandler;
 import ca.csf.simpleFx.SimpleFXController;
 
-public class MainWindowController extends SimpleFXController {
+public class MainWindowController extends SimpleFXController implements ClockEventHandler{
 
 	private Game game;
 	private Difficulty difficulty;
 	private MineButton gameBoard[][];
+	@FXML
+	private Label timeLabel;
+	private Clock clock;
+
 	@FXML
 	private GridPane gridPane;
 
 	public MainWindowController() {
 		game = new Game();
 		difficulty = Difficulty.DEBUTANT;
+		initialize(new Clock(0, 1000));
+	}
+	//Clock
+	public void initialize(Clock clock) {
+		this.clock = clock;
+		this.clock.start();
+		clock.addClockEventhandler(this);
+	}
+	
+	@Override
+	public void onTimeChanged(int timeInMilliseconds) {
+		int timeInSeconds = timeInMilliseconds / 1000;
+		//int hours = timeInSeconds / 3600;
+		//int minutes = timeInSeconds / 60 - hours * 60;
+		int seconds = timeInSeconds % 999;
+		timeLabel.setText(String.format("%03d", seconds));
+		
 	}
 	
 	@FXML
