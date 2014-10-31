@@ -55,7 +55,7 @@ public class Game {
 			for (int j = mineLocY + 1; j < mineLocY - 1 || j < 0; j--){
 				if(j < width){
 					if(i < height){
-						cells[mineLocX][mineLocY].addNbMinesNear();
+						cells[i][j].addNbMinesNear();
 					}
 				}
 			}
@@ -73,19 +73,28 @@ public class Game {
 		}
 		
 		//call cossin a francois avec cell[][].currentCellState
-		//Update Flag #.
+		//Update Flag #. =>=>=>
 	}
 	
 	public void updateLeftClick(int cellPosX, int cellPosY){
 		
 		if(!(cells[cellPosX][cellPosY].getIsRevealed() || 
-				cells[cellPosX][cellPosY].getCellState() == 1)){
+				cells[cellPosX][cellPosY].getCellState() >= 1)){
 			if(cells[cellPosX][cellPosY].getIsAMine()){
 				this.gameOver();
 				return;
 				
 			} else if(cells[cellPosX][cellPosY].getNbMinesNear() == 0){
 				//call cells nearby.isRevealed
+				for(int i = cellPosX + 1; i < cellPosX - 1 || i < 0; i--){
+					for (int j = cellPosY + 1; j < cellPosY - 1 || j < 0; j--){
+						if(j < width){
+							if(i < height){
+								this.updateLeftClick(i, j);
+							}
+						}
+					}
+				}
 				
 			} else {
 				//show number of mines nearby i.e. image de 8
