@@ -7,6 +7,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="ca.csf.TP2_Demineur.MainWindowController">
@@ -21,7 +24,17 @@
 								<MenuItem mnemonicParsing="false" text="Nouveau"
 									onAction="#newGame" />
 							</items>
-							
+							<SeparatorMenuItem />
+							<items>
+								<fx:define>
+									<ToggleGroup fx:id="difficultyGroup" />
+								</fx:define>
+								<RadioMenuItem text="Débutant" selected="true" toggleGroup="$difficultyGroup"/>
+								<RadioMenuItem text="Intermédiaire" toggleGroup="$difficultyGroup"/>
+								<RadioMenuItem text="Expert" toggleGroup="$difficultyGroup"/>
+
+							</items>
+
 						</Menu>
 
 						<Menu mnemonicParsing="false" text="?">
