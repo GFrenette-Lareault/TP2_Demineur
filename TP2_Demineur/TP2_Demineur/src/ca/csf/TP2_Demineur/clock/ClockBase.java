@@ -1,4 +1,4 @@
-package ca.csf.TP2_Demineur;
+package ca.csf.TP2_Demineur.clock;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

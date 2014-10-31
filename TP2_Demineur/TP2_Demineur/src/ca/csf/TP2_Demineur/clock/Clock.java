@@ -1,7 +1,9 @@
-package ca.csf.TP2_Demineur;
+package ca.csf.TP2_Demineur.clock;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 
 
@@ -14,7 +16,7 @@ public class Clock extends ClockBase {
 
 	private List<ClockEventHandler> clockEventList = new ArrayList<ClockEventHandler>();
 
-	public Clock(int startTimeInMiliseconds, int tickDelayInMiliseconds, MainSceneController mainSceneController) {
+	public Clock(int startTimeInMiliseconds, int tickDelayInMiliseconds, ClockSceneController clockSceneController) {
 		super(startTimeInMiliseconds, tickDelayInMiliseconds);
 	}
 	
