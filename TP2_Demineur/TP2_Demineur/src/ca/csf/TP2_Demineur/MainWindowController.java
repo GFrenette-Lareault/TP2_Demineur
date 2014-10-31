@@ -83,4 +83,5 @@ public class MainWindowController extends SimpleFXController implements
 		game.updateLeftClick(x, y);
 	}
 
+	
 }

@@ -2,7 +2,7 @@ package ca.csf.TP2_Demineur;
 
 import java.lang.Math;
 
-public class Game {
+public class Game implements GameEventHandler{
 
 	public Game() {
 		this.newGame(Difficulty.DEBUTANT);
@@ -105,7 +105,7 @@ public class Game {
 		}
 	}
 	
-	private void gameOver(){
+	public void gameOver(){
 		for(int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
 				if(cells[i][j].getIsAMine()){
@@ -121,7 +121,7 @@ public class Game {
 		//main game button image = loss
 	}
 	
-	private void victory(){
+	public void victory(){
 		if(nbCellsLeft == nbMines){
 			for(int i = 0; i < height; i++){
 				for(int j = 0; j < width; j++){
