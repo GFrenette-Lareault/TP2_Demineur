@@ -1,11 +1,16 @@
 package ca.csf.TP2_Demineur;
 
 import java.lang.Math;
+import java.util.ArrayList;
 
-public class Game implements GameEventHandler{
+public class Game{
 
-	public Game() {
+	private ArrayList<GameEventHandler> gameEventList = new ArrayList<GameEventHandler>();
+	
+	public Game(GameEventHandler gameEventHandler) {
+		
 		this.newGame(Difficulty.DEBUTANT);
+		gameEventList.add(gameEventHandler);
 	}
 	
 	private int height;
