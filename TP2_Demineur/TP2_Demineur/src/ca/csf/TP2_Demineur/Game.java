@@ -96,7 +96,7 @@ public class Game {
 			}
 
 			for (GameEventHandler gameEvent : gameEventList) {
-				gameEvent.updateFlag(nbFlags);
+				gameEvent.updateFlag(nbMines - nbFlags);
 			}
 		}
 	}
@@ -105,20 +105,22 @@ public class Game {
 
 		if (!(cells[cellPosX][cellPosY].getIsRevealed() || cells[cellPosX][cellPosY]
 				.getCellState() == 1)) {
+			cells[cellPosX][cellPosY].setRevealed();
 			if (cells[cellPosX][cellPosY].getIsAMine()) {
 				this.gameOver();
 				return;
 
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() == 0) {
 				// call cells nearby.isRevealed
-				for (int i = cellPosX + 1; i < cellPosX - 1 || i < 0; i--) {
-					for (int j = cellPosY + 1; j < cellPosY - 1 || j < 0; j--) {
+
+				for (int i = cellPosX + 1; i > cellPosX - 1 || i > 0; i--) {
+					for (int j = cellPosY + 1; j > cellPosY - 1 || j > 0; j--) {
 						if (j < height) {
 							if (i < width) {
 								for (GameEventHandler gameEvent : gameEventList) {
 									gameEvent.buttonLeftClick(i, j);
 								}
-								//this.updateLeftClick(i, j);
+								// this.updateLeftClick(i, j);
 							}
 						}
 					}

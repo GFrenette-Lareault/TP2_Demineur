@@ -2,8 +2,8 @@ package ca.csf.TP2_Demineur;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import ca.csf.TP2_Demineur.EventHandler.ButtonEventHandler;
 import ca.csf.TP2_Demineur.EventHandler.ClockEventHandler;
@@ -19,10 +19,10 @@ public class MainWindowController extends SimpleFXController implements
 	private MineButton gameBoard[][];
 	@FXML
 	private Label timeLabel;
-	@FXML 
+	@FXML
 	private Label flagsCounter;
 	private int nbFlags;
-	
+
 	private Clock clock;
 
 	@FXML
@@ -63,9 +63,9 @@ public class MainWindowController extends SimpleFXController implements
 			}
 		}
 		nbFlags = difficulty.nbMine();
-		
-		flagsCounter.setText(String.valueOf(nbFlags)); 
-		
+
+		flagsCounter.setText(String.valueOf(nbFlags));
+
 		getSimpleFxStage().sizeToScene();
 	}
 
@@ -96,19 +96,22 @@ public class MainWindowController extends SimpleFXController implements
 	}
 
 	public void victory() {
-		
+
 	}
 
 	public void gameOver() {
-		
+
 	}
 
 	public void buttonRightClicked(int x, int y, ButtonImage image) {
-		
+
+		ImageView imagev = new ImageView(new Image("file:ressource/" + image.URL()));
+
+		gameBoard[x][y].setGraphic(imagev);
 	}
 
 	public void buttonLeftClicked(int x, int y, ButtonImage image) {
-		
+
 	}
 
 	public void onFirstClick() {
@@ -116,12 +119,14 @@ public class MainWindowController extends SimpleFXController implements
 			clock.start();
 		}
 	}
-	
+
 	public void updateFlag(int flags) {
 		nbFlags = flags;
+		flagsCounter.setText(String.valueOf(nbFlags));
 	}
 
 	public void buttonLeftClick(int x, int y) {
 		gameBoard[x][y].clickButton();
+
 	}
 }

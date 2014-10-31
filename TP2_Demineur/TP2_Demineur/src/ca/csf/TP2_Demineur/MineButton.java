@@ -42,7 +42,6 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 				buttonEvent.onLeftClick(xPos, yPos);
 				buttonEvent.onFirstClick();
 			}
-			setDisable(true);
 		} else if (event.getButton() == MouseButton.SECONDARY) {
 			for (ButtonEventHandler buttonEvent:buttonEventList) {
 				buttonEvent.onRightClick(xPos, yPos);
@@ -55,6 +54,6 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 		for (ButtonEventHandler buttonEvent:buttonEventList) {
 			buttonEvent.onLeftClick(xPos, yPos);
 		}
-		setDisable(true);
+		setSelected(true);
 	}
 }
