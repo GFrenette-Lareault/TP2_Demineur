@@ -18,4 +18,8 @@ private final String URL;
 	public String URL(){
 		return URL;
 	}
+	
+	public ButtonImage getTypeFromInt(int index){
+		return null;	
+	}
 }

@@ -2,6 +2,8 @@ package ca.csf.TP2_Demineur;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import ca.csf.TP2_Demineur.EventHandler.ButtonEventHandler;
 import ca.csf.TP2_Demineur.EventHandler.ClockEventHandler;
@@ -117,5 +119,9 @@ public class MainWindowController extends SimpleFXController implements
 	
 	public void updateFlag(int flags) {
 		nbFlags = flags;
+	}
+
+	public void buttonLeftClick(int x, int y) {
+		gameBoard[x][y].clickButton();
 	}
 }

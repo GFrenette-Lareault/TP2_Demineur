@@ -50,5 +50,11 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 		}
 
 	}
-
+	
+	public void clickButton() {
+		for (ButtonEventHandler buttonEvent:buttonEventList) {
+			buttonEvent.onLeftClick(xPos, yPos);
+		}
+		setDisable(true);
+	}
 }
