@@ -29,9 +29,9 @@
 								<fx:define>
 									<ToggleGroup fx:id="difficultyGroup" />
 								</fx:define>
-								<RadioMenuItem text="Débutant" selected="true" toggleGroup="$difficultyGroup"/>
-								<RadioMenuItem text="Intermédiaire" toggleGroup="$difficultyGroup"/>
-								<RadioMenuItem text="Expert" toggleGroup="$difficultyGroup"/>
+								<RadioMenuItem text="Débutant" selected="true" toggleGroup="$difficultyGroup" onAction="#setEasy"/>
+								<RadioMenuItem text="Intermédiaire" toggleGroup="$difficultyGroup" onAction="#setMedium"/>
+								<RadioMenuItem text="Expert" toggleGroup="$difficultyGroup" onAction="#setHard"/>
 
 							</items>
 
