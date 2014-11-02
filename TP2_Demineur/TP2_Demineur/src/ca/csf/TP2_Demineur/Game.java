@@ -111,10 +111,14 @@ public class Game {
 						for (GameEventHandler gameEvent : gameEventList) {
 							gameEvent.buttonLeftClick(i, j);
 						}
+						for (GameEventHandler gameEvent : gameEventList) {
+							gameEvent.buttonLeftClicked(cellPosX, cellPosY,
+									ButtonImage.getTypeFromInt(cells[cellPosX][cellPosY].getNbMinesNear()));
+						}
 					}
 				}
 
-			} else if (cells[cellPosX][cellPosY].getNbMinesNear() < 0) {
+			} else if (cells[cellPosX][cellPosY].getNbMinesNear() > 0) {
 				for (GameEventHandler gameEvent : gameEventList) {
 					gameEvent.buttonLeftClicked(cellPosX, cellPosY,
 							ButtonImage.getTypeFromInt(cells[cellPosX][cellPosY].getNbMinesNear()));
@@ -132,11 +136,11 @@ public class Game {
 				if (cells[i][j].getIsAMine()) {
 					if (cells[i][j].getCellState() == 1) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonRightClicked(i, j, ButtonImage.MINE_FLAG);
+							gameEvent.buttonLeftClicked(i, j, ButtonImage.MINE_FLAG);
 						}
 					} else {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonRightClicked(i, j, ButtonImage.MINE_NORMAL);
+							gameEvent.buttonLeftClicked(i, j, ButtonImage.MINE_NORMAL);
 						}
 					}
 				}
