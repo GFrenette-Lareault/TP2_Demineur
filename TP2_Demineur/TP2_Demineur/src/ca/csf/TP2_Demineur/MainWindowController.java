@@ -111,7 +111,9 @@ public class MainWindowController extends SimpleFXController implements
 	}
 
 	public void buttonLeftClicked(int x, int y, ButtonImage image) {
+		ImageView imagev = new ImageView(new Image("file:ressource/" + image.URL()));
 
+		gameBoard[x][y].setGraphic(imagev);
 	}
 
 	public void onFirstClick() {

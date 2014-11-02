@@ -18,10 +18,10 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 	public MineButton(int x, int y, ButtonEventHandler buttonEvent) {
 		xPos = x;
 		yPos = y;
-		setMinWidth(30);
-		setMinHeight(30);
-		setMaxWidth(30);
-		setMaxHeight(30);
+		setMinWidth(25);
+		setMinHeight(25);
+		setMaxWidth(25);
+		setMaxHeight(25);
 		
 		addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 		buttonEventList.add(buttonEvent);

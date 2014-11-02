@@ -113,21 +113,25 @@ public class Game {
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() == 0) {
 				// call cells nearby.isRevealed
 
-				for (int i = cellPosX + 1; i > cellPosX - 1 || i > 0; i--) {
-					for (int j = cellPosY + 1; j > cellPosY - 1 || j > 0; j--) {
-						if (j < height) {
-							if (i < width) {
+				for (int i = cellPosX + 1; i > cellPosX - 1 && i >= 0 && i < width; i--) {
+					for (int j = cellPosY + 1; j > cellPosY - 1 && j >= 0 && j< height; j--) {
+						//if (j < height) {
+							//if (i < width) {
 								for (GameEventHandler gameEvent : gameEventList) {
 									gameEvent.buttonLeftClick(i, j);
 								}
-								// this.updateLeftClick(i, j);
-							}
-						}
+						//	}
+						//}
 					}
 				}
 
-			} else {
-				// show number of mines nearby i.e. image de 8
+			} else if (cells[cellPosX][cellPosY].getNbMinesNear() > 0){
+				for (GameEventHandler gameEvent : gameEventList) {
+					gameEvent.buttonLeftClicked(cellPosX, cellPosY, ButtonImage
+							.getTypeFromInt(cells[cellPosX][cellPosY]
+									.getNbMinesNear()));
+				}
+
 			}
 			nbCellsLeft--;
 			this.victory();
