@@ -59,16 +59,11 @@ public class Game {
 	}
 
 	private void assignNearbyMineValue(int mineLocX, int mineLocY) {
-		for (int i = mineLocX + 1; i < mineLocX - 1 || i < 0; i--) {
-			for (int j = mineLocY + 1; j < mineLocY - 1 || j < 0; j--) {
-				if (j < height) {
-					if (i < width) {
-						cells[i][j].addNbMinesNear();
-					}
-				}
+		for (int i = mineLocX - 1; i < mineLocX + 1 && i > 0 ; i++) {
+			for (int j = mineLocY - 1; j < mineLocY + 1 && j > 0; j++) {
+				cells[i][j].addNbMinesNear();
 			}
 		}
-
 	}
 
 	public void updateRightClick(int cellPosX, int cellPosY) {
@@ -77,20 +72,17 @@ public class Game {
 			cells[cellPosX][cellPosY].setCellState();
 			if (cells[cellPosX][cellPosY].getCellState() == 1) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY,
-							ButtonImage.FLAG);
+					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.FLAG);
 				}
 				nbFlags++;
 			} else if (cells[cellPosX][cellPosY].getCellState() == 2) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY,
-							ButtonImage.QUESTION_MARK);
+					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.QUESTION_MARK);
 				}
 				nbFlags--;
 			} else {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY,
-							ButtonImage.EMPTY);
+					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.EMPTY);
 				}
 
 			}
@@ -103,8 +95,7 @@ public class Game {
 
 	public void updateLeftClick(int cellPosX, int cellPosY) {
 
-		if (!(cells[cellPosX][cellPosY].getIsRevealed() || cells[cellPosX][cellPosY]
-				.getCellState() == 1)) {
+		if (!(cells[cellPosX][cellPosY].getIsRevealed() || cells[cellPosX][cellPosY].getCellState() == 1)) {
 			cells[cellPosX][cellPosY].setRevealed();
 			if (cells[cellPosX][cellPosY].getIsAMine()) {
 				this.gameOver();
@@ -113,23 +104,20 @@ public class Game {
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() == 0) {
 				// call cells nearby.isRevealed
 
-				for (int i = cellPosX + 1; i > cellPosX - 1 && i >= 0 && i < width; i--) {
-					for (int j = cellPosY + 1; j > cellPosY - 1 && j >= 0 && j< height; j--) {
-						//if (j < height) {
-							//if (i < width) {
-								for (GameEventHandler gameEvent : gameEventList) {
-									gameEvent.buttonLeftClick(i, j);
-								}
-						//	}
-						//}
+				for (int i = cellPosX + 1; i >= cellPosX - 1 && i > 0 && i < width; i--) {
+					for (int j = cellPosY + 1; j >= cellPosY - 1 && j > 0 && j < height; j--) {
+						// if (j < height) {
+						// if (i < width) {
+						for (GameEventHandler gameEvent : gameEventList) {
+							gameEvent.buttonLeftClick(i, j);
+						}
 					}
 				}
 
-			} else if (cells[cellPosX][cellPosY].getNbMinesNear() > 0){
+			} else if (cells[cellPosX][cellPosY].getNbMinesNear() < 0) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonLeftClicked(cellPosX, cellPosY, ButtonImage
-							.getTypeFromInt(cells[cellPosX][cellPosY]
-									.getNbMinesNear()));
+					gameEvent.buttonLeftClicked(cellPosX, cellPosY,
+							ButtonImage.getTypeFromInt(cells[cellPosX][cellPosY].getNbMinesNear()));
 				}
 
 			}
@@ -144,13 +132,11 @@ public class Game {
 				if (cells[i][j].getIsAMine()) {
 					if (cells[i][j].getCellState() == 1) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonRightClicked(i, j,
-									ButtonImage.MINE_FLAG);
+							gameEvent.buttonRightClicked(i, j, ButtonImage.MINE_FLAG);
 						}
 					} else {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonRightClicked(i, j,
-									ButtonImage.MINE_NORMAL);
+							gameEvent.buttonRightClicked(i, j, ButtonImage.MINE_NORMAL);
 						}
 					}
 				}
@@ -168,8 +154,7 @@ public class Game {
 				for (int j = 0; j < height; j++) {
 					if (cells[i][j].getIsAMine()) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent
-									.buttonRightClicked(i, j, ButtonImage.FLAG);
+							gameEvent.buttonRightClicked(i, j, ButtonImage.FLAG);
 						}
 					}
 				}

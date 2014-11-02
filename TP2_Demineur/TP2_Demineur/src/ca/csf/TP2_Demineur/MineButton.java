@@ -22,7 +22,7 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 		setMinHeight(25);
 		setMaxWidth(25);
 		setMaxHeight(25);
-		
+
 		addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 		buttonEventList.add(buttonEvent);
 	}
@@ -38,20 +38,20 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 	@Override
 	public void handle(MouseEvent event) {
 		if (event.getButton() == MouseButton.PRIMARY) {
-			for (ButtonEventHandler buttonEvent:buttonEventList) {
+			for (ButtonEventHandler buttonEvent : buttonEventList) {
 				buttonEvent.onLeftClick(xPos, yPos);
 				buttonEvent.onFirstClick();
 			}
 		} else if (event.getButton() == MouseButton.SECONDARY) {
-			for (ButtonEventHandler buttonEvent:buttonEventList) {
+			for (ButtonEventHandler buttonEvent : buttonEventList) {
 				buttonEvent.onRightClick(xPos, yPos);
 			}
 		}
 
 	}
-	
+
 	public void clickButton() {
-		for (ButtonEventHandler buttonEvent:buttonEventList) {
+		for (ButtonEventHandler buttonEvent : buttonEventList) {
 			buttonEvent.onLeftClick(xPos, yPos);
 		}
 		setSelected(true);

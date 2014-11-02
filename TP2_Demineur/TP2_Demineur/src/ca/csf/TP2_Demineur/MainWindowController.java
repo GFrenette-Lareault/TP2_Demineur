@@ -11,8 +11,7 @@ import ca.csf.TP2_Demineur.EventHandler.GameEventHandler;
 import ca.csf.TP2_Demineur.clock.Clock;
 import ca.csf.simpleFx.SimpleFXController;
 
-public class MainWindowController extends SimpleFXController implements
-		ClockEventHandler, ButtonEventHandler, GameEventHandler {
+public class MainWindowController extends SimpleFXController implements ClockEventHandler, ButtonEventHandler, GameEventHandler {
 
 	private Game game;
 	private Difficulty difficulty;
