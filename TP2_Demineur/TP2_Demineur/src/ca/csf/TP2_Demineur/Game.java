@@ -114,9 +114,17 @@ public class Game {
 
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() == 0) {
 				// call cells nearby.isRevealed
+				int maxLocX = 1;
+				int maxLocY = 1;
+				if(cellPosX + 1 == width){
+					maxLocX = 0;
+				}
+				if(cellPosY + 1 == width){
+					maxLocY = 0;
+				}
 
-				for (int i = cellPosX + 1; i >= cellPosX - 1 && i >= 0 && i < width; i--) {
-					for (int j = cellPosY + 1; j >= cellPosY - 1 && j >= 0 && j < height; j--) {
+				for (int i = cellPosX + maxLocX; i >= cellPosX - 1 && i >= 0 && i < width; i--) {
+					for (int j = cellPosY + maxLocY; j >= cellPosY - 1 && j >= 0 && j < height; j--) {
 						// if (j < height) {
 						// if (i < width) {
 						for (GameEventHandler gameEvent : gameEventList) {
