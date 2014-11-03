@@ -51,7 +51,7 @@ public class Game {
 			cells[mineLocX][mineLocY].setIsAMine();
 			assignNearbyMineValue(mineLocX, mineLocY);
 
-			if (nbMine > 0) {
+			if (nbMine > 1) {
 				createMine(nbMine - 1);
 			}
 		}
@@ -59,8 +59,10 @@ public class Game {
 	}
 
 	private void assignNearbyMineValue(int mineLocX, int mineLocY) {
-		for (int i = mineLocX - 1; i < mineLocX + 1 && i > 0 ; i++) {
-			for (int j = mineLocY - 1; j < mineLocY + 1 && j > 0; j++) {
+		if(mineLocX - 1 < 0) mineLocX = 1;
+		if(mineLocY - 1 < 0) mineLocY = 1;
+		for (int i = mineLocX - 1; i < mineLocX + 2 && i < width; i++) {
+			for (int j = mineLocY - 1; j < mineLocY + 2 && j < height; j++) {
 				cells[i][j].addNbMinesNear();
 			}
 		}
