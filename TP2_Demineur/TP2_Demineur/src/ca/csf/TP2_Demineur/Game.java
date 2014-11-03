@@ -23,8 +23,8 @@ public class Game {
 	}
 
 	public void newGame(Difficulty difficulty) {
-
 		// set difficulty and creates a new board
+		
 		this.height = difficulty.height();
 		this.width = difficulty.width();
 		this.nbMines = difficulty.nbMine();
@@ -51,7 +51,8 @@ public class Game {
 		} else {
 			cells[mineLocX][mineLocY].setIsAMine();
 			assignNearbyMineValue(mineLocX, mineLocY);
-
+			
+			// Calls back createMine with the number of mines left
 			if (nbMine > 1) {
 				createMine(nbMine - 1);
 			}
@@ -120,6 +121,7 @@ public class Game {
 				// Lowers the cells being verified accordingly to avoid out of bound errors.
 				int maxLocX = 1;
 				int maxLocY = 1;
+				
 				if(cellPosX + 1 == width){
 					maxLocX = 0;
 				}
@@ -129,8 +131,6 @@ public class Game {
 
 				for (int i = cellPosX + maxLocX; i >= cellPosX - 1 && i >= 0 && i < width; i--) {
 					for (int j = cellPosY + maxLocY; j >= cellPosY - 1 && j >= 0 && j < height; j--) {
-						// if (j < height) {
-						// if (i < width) {
 						for (GameEventHandler gameEvent : gameEventList) {
 							gameEvent.buttonLeftClick(i, j);
 						}
