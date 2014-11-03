@@ -61,8 +61,8 @@ public class Game {
 	private void assignNearbyMineValue(int mineLocX, int mineLocY) {
 		if(mineLocX - 1 < 0) mineLocX = 1;
 		if(mineLocY - 1 < 0) mineLocY = 1;
-		for (int i = mineLocX - 1; i < mineLocX + 2 && i < width; i++) {
-			for (int j = mineLocY - 1; j < mineLocY + 2 && j < height; j++) {
+		for (int i = mineLocX - 1; i <= mineLocX + 1 && i < width; i++) {
+			for (int j = mineLocY - 1; j <= mineLocY + 1 && j < height; j++) {
 				cells[i][j].addNbMinesNear();
 			}
 		}
@@ -106,8 +106,8 @@ public class Game {
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() == 0) {
 				// call cells nearby.isRevealed
 
-				for (int i = cellPosX + 1; i >= cellPosX - 1 && i > 0 && i < width; i--) {
-					for (int j = cellPosY + 1; j >= cellPosY - 1 && j > 0 && j < height; j--) {
+				for (int i = cellPosX + 1; i >= cellPosX - 1 && i >= 0 && i < width; i--) {
+					for (int j = cellPosY + 1; j >= cellPosY - 1 && j >= 0 && j < height; j--) {
 						// if (j < height) {
 						// if (i < width) {
 						for (GameEventHandler gameEvent : gameEventList) {
