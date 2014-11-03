@@ -28,7 +28,7 @@ public class Game {
 		this.height = difficulty.height();
 		this.width = difficulty.width();
 		this.nbMines = difficulty.nbMine();
-		this.nbFlags = nbMines;
+		this.nbFlags = 0;
 
 		cells = new Cell[width][height];
 		for (int i = 0; i < width; i++) {
