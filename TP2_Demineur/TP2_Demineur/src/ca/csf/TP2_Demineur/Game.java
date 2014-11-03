@@ -28,6 +28,7 @@ public class Game {
 		this.height = difficulty.height();
 		this.width = difficulty.width();
 		this.nbMines = difficulty.nbMine();
+		this.nbFlags = nbMines;
 
 		cells = new Cell[width][height];
 		for (int i = 0; i < width; i++) {
@@ -59,10 +60,18 @@ public class Game {
 	}
 
 	private void assignNearbyMineValue(int mineLocX, int mineLocY) {
-		if(mineLocX - 1 < 0) mineLocX = 1;
-		if(mineLocY - 1 < 0) mineLocY = 1;
-		for (int i = mineLocX - 1; i <= mineLocX + 1 && i < width; i++) {
-			for (int j = mineLocY - 1; j <= mineLocY + 1 && j < height; j++) {
+		int minLocX = 1;
+		int minLocY = 1;
+		
+		if(mineLocX -1 < 0){
+			minLocX = 0;
+		}
+		if(mineLocY -1 < 0){
+			minLocY = 0;
+		}
+		
+		for (int i = mineLocX - minLocX; i <= mineLocX + 1 && i < width; i++) {
+			for (int j = mineLocY - minLocY; j <= mineLocY + 1 && j < height; j++) {
 				cells[i][j].addNbMinesNear();
 			}
 		}
