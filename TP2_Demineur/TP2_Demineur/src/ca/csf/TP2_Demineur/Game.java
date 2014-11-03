@@ -60,6 +60,8 @@ public class Game {
 	}
 
 	private void assignNearbyMineValue(int mineLocX, int mineLocY) {
+		// Assigns value to minLoc X & Y vars depending on location of the selected cell on the board
+		// Lowers the cells being verified accordingly to avoid out of bound errors.
 		int minLocX = 1;
 		int minLocY = 1;
 		
@@ -113,7 +115,9 @@ public class Game {
 				return;
 
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() == 0) {
-				// call cells nearby.isRevealed
+				// Call cells nearby.isRevealed
+				// Assigns value to maxLoc X & Y vars depending on location of the selected cell on the board
+				// Lowers the cells being verified accordingly to avoid out of bound errors.
 				int maxLocX = 1;
 				int maxLocY = 1;
 				if(cellPosX + 1 == width){
