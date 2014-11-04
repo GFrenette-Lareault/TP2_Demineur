@@ -10,6 +10,7 @@
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="ca.csf.TP2_Demineur.MainWindowController">
@@ -29,9 +30,12 @@
 								<fx:define>
 									<ToggleGroup fx:id="difficultyGroup" />
 								</fx:define>
-								<RadioMenuItem text="Débutant" selected="true" toggleGroup="$difficultyGroup" onAction="#setEasy"/>
-								<RadioMenuItem text="Intermédiaire" toggleGroup="$difficultyGroup" onAction="#setMedium"/>
-								<RadioMenuItem text="Expert" toggleGroup="$difficultyGroup" onAction="#setHard"/>
+								<RadioMenuItem text="Débutant" selected="true"
+									toggleGroup="$difficultyGroup" onAction="#setEasy" />
+								<RadioMenuItem text="Intermédiaire" toggleGroup="$difficultyGroup"
+									onAction="#setMedium" />
+								<RadioMenuItem text="Expert" toggleGroup="$difficultyGroup"
+									onAction="#setHard" />
 
 							</items>
 
@@ -49,10 +53,10 @@
 				<Pane prefHeight="200.0" prefWidth="200.0"
 					style="-fx-background-color: B0B0B0;">
 					<children>
-						<Button layoutX="82.0" layoutY="9.0" mnemonicParsing="false"
-							text="Button" onAction="#newGame" />
-						<Label layoutX="14.0" layoutY="13.0" text="Flags" fx:id="flagsCounter"/>
-						<Label layoutX="162.0" layoutY="13.0" text="Label" fx:id="timeLabel"/>
+							<Button layoutX="82.0" layoutY="9.0" mnemonicParsing="false"
+								text="Button" onAction="#newGame" />
+							<Label layoutX="14.0" layoutY="13.0" text="Flags" fx:id="flagsCounter" />
+							<Label layoutX="162.0" layoutY="13.0" text="Label" fx:id="timeLabel" />
 					</children>
 				</Pane>
 			</children>

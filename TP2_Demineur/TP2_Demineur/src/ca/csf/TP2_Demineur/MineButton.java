@@ -8,7 +8,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
-public class MineButton extends ToggleButton implements EventHandler<MouseEvent> {
+public class MineButton extends ToggleButton implements
+		EventHandler<MouseEvent> {
 
 	private ArrayList<ButtonEventHandler> buttonEventList = new ArrayList<ButtonEventHandler>();
 
@@ -25,6 +26,7 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 
 		addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 		buttonEventList.add(buttonEvent);
+		disarm();
 	}
 
 	public int getxPos() {
@@ -37,15 +39,19 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 
 	@Override
 	public void handle(MouseEvent event) {
-		if (event.getButton() == MouseButton.PRIMARY) {
-			for (ButtonEventHandler buttonEvent : buttonEventList) {
-				buttonEvent.onLeftClick(xPos, yPos);
-				buttonEvent.onFirstClick();
+		if (isSelected()) {
+			if (event.getButton() == MouseButton.PRIMARY) {
+				for (ButtonEventHandler buttonEvent : buttonEventList) {
+					buttonEvent.onLeftClick(xPos, yPos);
+					buttonEvent.onFirstClick();
+				}
 			}
 		} else if (event.getButton() == MouseButton.SECONDARY) {
 			for (ButtonEventHandler buttonEvent : buttonEventList) {
 				buttonEvent.onRightClick(xPos, yPos);
 			}
+		} else {
+			setSelected(true);
 		}
 
 	}
@@ -55,5 +61,6 @@ public class MineButton extends ToggleButton implements EventHandler<MouseEvent>
 			buttonEvent.onLeftClick(xPos, yPos);
 		}
 		setSelected(true);
+
 	}
 }

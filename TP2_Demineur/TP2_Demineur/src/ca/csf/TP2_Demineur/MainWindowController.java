@@ -95,11 +95,12 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 	}
 
 	public void victory() {
-
+		clock.pause();
 	}
 
 	public void gameOver() {
-
+		clock.pause();
+		
 	}
 
 	public void buttonRightClicked(int x, int y, ButtonImage image) {
