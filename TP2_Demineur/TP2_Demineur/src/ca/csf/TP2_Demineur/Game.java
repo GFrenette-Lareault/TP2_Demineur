@@ -24,7 +24,7 @@ public class Game {
 
 	public void newGame(Difficulty difficulty) {
 		// set difficulty and creates a new board
-		
+
 		this.height = difficulty.height();
 		this.width = difficulty.width();
 		this.nbMines = difficulty.nbMine();
@@ -51,7 +51,7 @@ public class Game {
 		} else {
 			cells[mineLocX][mineLocY].setIsAMine();
 			assignNearbyMineValue(mineLocX, mineLocY);
-			
+
 			// Calls back createMine with the number of mines left
 			if (nbMine > 1) {
 				createMine(nbMine - 1);
@@ -61,18 +61,20 @@ public class Game {
 	}
 
 	private void assignNearbyMineValue(int mineLocX, int mineLocY) {
-		// Assigns value to minLoc X & Y vars depending on location of the selected cell on the board
-		// Lowers the cells being verified accordingly to avoid out of bound errors.
+		// Assigns value to minLoc X & Y vars depending on location of the
+		// selected cell on the board
+		// Lowers the cells being verified accordingly to avoid out of bound
+		// errors.
 		int minLocX = 1;
 		int minLocY = 1;
-		
-		if(mineLocX -1 < 0){
+
+		if (mineLocX - 1 < 0) {
 			minLocX = 0;
 		}
-		if(mineLocY -1 < 0){
+		if (mineLocY - 1 < 0) {
 			minLocY = 0;
 		}
-		
+
 		for (int i = mineLocX - minLocX; i <= mineLocX + 1 && i < width; i++) {
 			for (int j = mineLocY - minLocY; j <= mineLocY + 1 && j < height; j++) {
 				cells[i][j].addNbMinesNear();
@@ -86,17 +88,20 @@ public class Game {
 			cells[cellPosX][cellPosY].setCellState();
 			if (cells[cellPosX][cellPosY].getCellState() == 1) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.FLAG);
+					gameEvent.buttonRightClicked(cellPosX, cellPosY,
+							ButtonImage.FLAG);
 				}
 				nbFlags++;
 			} else if (cells[cellPosX][cellPosY].getCellState() == 2) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.QUESTION_MARK);
+					gameEvent.buttonRightClicked(cellPosX, cellPosY,
+							ButtonImage.QUESTION_MARK);
 				}
 				nbFlags--;
 			} else {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY, ButtonImage.EMPTY);
+					gameEvent.buttonRightClicked(cellPosX, cellPosY,
+							ButtonImage.EMPTY);
 				}
 
 			}
@@ -109,7 +114,8 @@ public class Game {
 
 	public void updateLeftClick(int cellPosX, int cellPosY) {
 
-		if (!(cells[cellPosX][cellPosY].getIsRevealed() || cells[cellPosX][cellPosY].getCellState() == 1)) {
+		if (!(cells[cellPosX][cellPosY].getIsRevealed() || cells[cellPosX][cellPosY]
+				.getCellState() == 1)) {
 			cells[cellPosX][cellPosY].setRevealed();
 			if (cells[cellPosX][cellPosY].getIsAMine()) {
 				this.gameOver();
@@ -117,34 +123,44 @@ public class Game {
 
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() == 0) {
 				// Call cells nearby.isRevealed
-				// Assigns value to maxLoc X & Y vars depending on location of the selected cell on the board
-				// Lowers the cells being verified accordingly to avoid out of bound errors.
+				// Assigns value to maxLoc X & Y vars depending on location of
+				// the selected cell on the board
+				// Lowers the cells being verified accordingly to avoid out of
+				// bound errors.
 				int maxLocX = 1;
 				int maxLocY = 1;
-				
-				if(cellPosX + 1 == width){
+
+				if (cellPosX + 1 == width) {
 					maxLocX = 0;
 				}
-				if(cellPosY + 1 == width){
+				if (cellPosY + 1 == height) {
 					maxLocY = 0;
 				}
 
-				for (int i = cellPosX + maxLocX; i >= cellPosX - 1 && i >= 0 && i < width; i--) {
-					for (int j = cellPosY + maxLocY; j >= cellPosY - 1 && j >= 0 && j < height; j--) {
+				for (int i = cellPosX + maxLocX; i >= cellPosX - 1 && i >= 0
+						&& i < width; i--) {
+					for (int j = cellPosY + maxLocY; j >= cellPosY - 1
+							&& j >= 0 && j < height; j--) {
 						for (GameEventHandler gameEvent : gameEventList) {
 							gameEvent.buttonLeftClick(i, j);
 						}
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonLeftClicked(cellPosX, cellPosY,
-									ButtonImage.getTypeFromInt(cells[cellPosX][cellPosY].getNbMinesNear()));
+							gameEvent
+									.buttonLeftClicked(
+											cellPosX,
+											cellPosY,
+											ButtonImage
+													.getTypeFromInt(cells[cellPosX][cellPosY]
+															.getNbMinesNear()));
 						}
 					}
 				}
 
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() > 0) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonLeftClicked(cellPosX, cellPosY,
-							ButtonImage.getTypeFromInt(cells[cellPosX][cellPosY].getNbMinesNear()));
+					gameEvent.buttonLeftClicked(cellPosX, cellPosY, ButtonImage
+							.getTypeFromInt(cells[cellPosX][cellPosY]
+									.getNbMinesNear()));
 				}
 
 			}
@@ -157,14 +173,24 @@ public class Game {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				if (cells[i][j].getIsAMine()) {
-					if (cells[i][j].getCellState() == 1) {
+					if (cells[i][j].getIsRevealed()) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonLeftClicked(i, j, ButtonImage.MINE_FLAG);
+							gameEvent.buttonLeftClicked(i, j,
+									ButtonImage.MINE_RED);
 						}
-					} else {
+
+					} else if (cells[i][j].getCellState() == 0) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonLeftClicked(i, j, ButtonImage.MINE_NORMAL);
+							gameEvent.buttonLeftClicked(i, j,
+									ButtonImage.MINE_NORMAL);
 						}
+					}
+				}
+				if (cells[i][j].getCellState() == 1
+						&& !cells[i][j].getIsAMine()) {
+					for (GameEventHandler gameEvent : gameEventList) {
+						gameEvent
+								.buttonLeftClicked(i, j, ButtonImage.MINE_FLAG);
 					}
 				}
 			}
@@ -181,7 +207,8 @@ public class Game {
 				for (int j = 0; j < height; j++) {
 					if (cells[i][j].getIsAMine()) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonRightClicked(i, j, ButtonImage.FLAG);
+							gameEvent
+									.buttonRightClicked(i, j, ButtonImage.FLAG);
 						}
 					}
 				}

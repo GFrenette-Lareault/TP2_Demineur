@@ -3,7 +3,7 @@ package ca.csf.TP2_Demineur;
 public enum ButtonImage {
 	EMPTY(0, null), ONE(1, "1.png"), TWO(2, "2.png"), TREE(3, "3.png"), FOUR(4, "4.png"), FIVE(5, "5.png"), SIX(6, "6.png"), SEVEN(
 			7, "7.png"), EIGHT(8, "8.png"), FLAG(9, "Flag.png"), QUESTION_MARK(10, "QuestionMark.png"), MINE_FLAG(11,
-			"MineCross.png"), MINE_NORMAL(12, "Mine.png");
+			"MineCross.png"), MINE_NORMAL(12, "Mine.png"), MINE_RED(13, "MineRed.png");
 
 	private final int index;
 	private final String URL;
