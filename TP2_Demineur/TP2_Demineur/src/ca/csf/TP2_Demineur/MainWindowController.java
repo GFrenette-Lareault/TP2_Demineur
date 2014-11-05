@@ -1,5 +1,6 @@
 package ca.csf.TP2_Demineur;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,8 +11,11 @@ import ca.csf.TP2_Demineur.EventHandler.ClockEventHandler;
 import ca.csf.TP2_Demineur.EventHandler.GameEventHandler;
 import ca.csf.TP2_Demineur.clock.Clock;
 import ca.csf.simpleFx.SimpleFXController;
+import ca.csf.simpleFx.events.WindowFocusEvent;
 
-public class MainWindowController extends SimpleFXController implements ClockEventHandler, ButtonEventHandler, GameEventHandler {
+public class MainWindowController extends SimpleFXController implements
+		ClockEventHandler, ButtonEventHandler, GameEventHandler,
+		EventHandler<WindowFocusEvent> {
 
 	private Game game;
 	private Difficulty difficulty;
@@ -31,6 +35,11 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 		game = new Game(this);
 		difficulty = Difficulty.DEBUTANT;
 		initialize(new Clock(0, 1000));
+	}
+
+	@Override
+	protected void onLoadedStage() {
+		getSimpleFxStage().addEventHandler(WindowFocusEvent.ANY, this);
 	}
 
 	// Clock
@@ -100,18 +109,20 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 
 	public void gameOver() {
 		clock.pause();
-		
+
 	}
 
 	public void buttonRightClicked(int x, int y, ButtonImage image) {
 
-		ImageView imagev = new ImageView(new Image("file:ressource/" + image.URL()));
+		ImageView imagev = new ImageView(new Image("file:ressource/"
+				+ image.URL()));
 
 		gameBoard[x][y].setGraphic(imagev);
 	}
 
 	public void buttonLeftClicked(int x, int y, ButtonImage image) {
-		ImageView imagev = new ImageView(new Image("file:ressource/" + image.URL()));
+		ImageView imagev = new ImageView(new Image("file:ressource/"
+				+ image.URL()));
 
 		gameBoard[x][y].setGraphic(imagev);
 	}
@@ -130,5 +141,15 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 	public void buttonLeftClick(int x, int y) {
 		gameBoard[x][y].clickButton();
 
+	}
+
+	@Override
+	public void handle(WindowFocusEvent event) {
+
+		if (event.getEventType() == WindowFocusEvent.GET_FOCUS) {
+			clock.start();
+		} else if (event.getEventType() == WindowFocusEvent.LOOSE_FOCUS) {
+			clock.pause();
+		}
 	}
 }
