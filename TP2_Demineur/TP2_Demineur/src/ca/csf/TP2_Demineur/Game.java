@@ -141,17 +141,19 @@ public class Game {
 						&& i < width; i--) {
 					for (int j = cellPosY + maxLocY; j >= cellPosY - 1
 							&& j >= 0 && j < height; j--) {
-						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonLeftClick(i, j);
-						}
-						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent
-									.buttonLeftClicked(
-											cellPosX,
-											cellPosY,
-											ButtonImage
-													.getTypeFromInt(cells[cellPosX][cellPosY]
-															.getNbMinesNear()));
+						if (!(cells[i][j].getCellState() == 1)) {
+							for (GameEventHandler gameEvent : gameEventList) {
+								gameEvent.buttonLeftClick(i, j);
+							}
+							for (GameEventHandler gameEvent : gameEventList) {
+								gameEvent
+										.buttonLeftClicked(
+												cellPosX,
+												cellPosY,
+												ButtonImage
+														.getTypeFromInt(cells[cellPosX][cellPosY]
+																.getNbMinesNear()));
+							}
 						}
 					}
 				}
