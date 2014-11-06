@@ -13,6 +13,7 @@ public class Game {
 	private int nbMines;
 	private int nbFlags = 0;
 	private int nbCellsLeft;
+	private boolean isCheating = false;
 
 	private Cell[][] cells;
 
@@ -222,15 +223,31 @@ public class Game {
 	}
 
 	public void cheat() {
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				if (cells[i][j].getIsAMine()) {
-					for (GameEventHandler gameEvent : gameEventList) {
-						gameEvent.buttonLeftClicked(i, j,
-								ButtonImage.MINE_NORMAL);
+		if (!isCheating) {
+			isCheating = true;
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					if (cells[i][j].getIsAMine()) {
+						for (GameEventHandler gameEvent : gameEventList) {
+							gameEvent.buttonLeftClicked(i, j,
+									ButtonImage.MINE_NORMAL);
+						}
+					}
+				}
+			}
+		}else {
+			isCheating = false;
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					if (cells[i][j].getIsAMine()) {
+						for (GameEventHandler gameEvent : gameEventList) {
+							gameEvent.buttonLeftClicked(i, j,
+									ButtonImage.EMPTY);
+						}
 					}
 				}
 			}
 		}
+
 	}
 }
