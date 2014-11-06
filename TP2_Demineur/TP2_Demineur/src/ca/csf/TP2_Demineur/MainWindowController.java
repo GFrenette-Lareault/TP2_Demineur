@@ -61,7 +61,6 @@ public class MainWindowController extends SimpleFXController implements
 
 	@FXML
 	public void newGame() {
-		game.newGame(difficulty);
 		gridPane.getChildren().clear();
 		clock.reset();
 		gameBoard = new MineButton[difficulty.width()][difficulty.height()];
@@ -74,9 +73,8 @@ public class MainWindowController extends SimpleFXController implements
 			}
 		}
 		
-		if (cheatBtn.isSelected()) {
-			cheat();
-		}
+		game.newGame(difficulty);
+		
 		nbFlags = difficulty.nbMine();
 
 		flagsCounter.setText(String.valueOf(nbFlags));

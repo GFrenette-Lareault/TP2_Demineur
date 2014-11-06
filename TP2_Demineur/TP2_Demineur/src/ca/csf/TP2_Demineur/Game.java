@@ -39,7 +39,11 @@ public class Game {
 		}
 		nbCellsLeft = width * height;
 		createMine(nbMines);
-
+		
+		if (isCheating) {
+			isCheating = false;
+			cheat();
+		}
 	}
 
 	private void createMine(int nbMine) {
@@ -235,14 +239,14 @@ public class Game {
 					}
 				}
 			}
-		}else {
+		} else {
 			isCheating = false;
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++) {
 					if (cells[i][j].getIsAMine()) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonLeftClicked(i, j,
-									ButtonImage.EMPTY);
+							gameEvent
+									.buttonLeftClicked(i, j, ButtonImage.EMPTY);
 						}
 					}
 				}
