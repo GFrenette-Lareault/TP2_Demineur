@@ -53,6 +53,7 @@ public class MineButton extends ToggleButton implements
 		} else {
 			setSelected(true);
 		}
+		event.consume();
 
 	}
 

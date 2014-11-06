@@ -12,6 +12,7 @@ import ca.csf.TP2_Demineur.EventHandler.GameEventHandler;
 import ca.csf.TP2_Demineur.clock.Clock;
 import ca.csf.simpleFx.SimpleFXController;
 import ca.csf.simpleFx.events.WindowFocusEvent;
+import javafx.scene.control.RadioMenuItem;
 
 public class MainWindowController extends SimpleFXController implements
 		ClockEventHandler, ButtonEventHandler, GameEventHandler,
@@ -30,6 +31,8 @@ public class MainWindowController extends SimpleFXController implements
 
 	@FXML
 	private GridPane gridPane;
+	@FXML 
+	private RadioMenuItem cheatBtn;
 
 	public MainWindowController() {
 		game = new Game(this);
@@ -39,7 +42,7 @@ public class MainWindowController extends SimpleFXController implements
 
 	@Override
 	protected void onLoadedStage() {
-		getSimpleFxStage().addEventHandler(WindowFocusEvent.ANY, this);
+		getSimpleFxStage().setOnFocusChanged(this);
 	}
 
 	// Clock
@@ -69,6 +72,10 @@ public class MainWindowController extends SimpleFXController implements
 				gameBoard[i][j] = new MineButton(i, j, this);
 				gridPane.add(gameBoard[i][j], i, j);
 			}
+		}
+		
+		if (cheatBtn.isSelected()) {
+			cheat();
 		}
 		nbFlags = difficulty.nbMine();
 
@@ -111,6 +118,10 @@ public class MainWindowController extends SimpleFXController implements
 		clock.pause();
 
 	}
+	@FXML
+	public void cheat(){
+		game.cheat();
+	}
 
 	public void buttonRightClicked(int x, int y, ButtonImage image) {
 
@@ -147,7 +158,9 @@ public class MainWindowController extends SimpleFXController implements
 	public void handle(WindowFocusEvent event) {
 
 		if (event.getEventType() == WindowFocusEvent.GET_FOCUS) {
-			clock.start();
+			if (clock.getTimeInMiliseconds() != 0) {
+				clock.start();
+			}
 		} else if (event.getEventType() == WindowFocusEvent.LOOSE_FOCUS) {
 			clock.pause();
 		}
