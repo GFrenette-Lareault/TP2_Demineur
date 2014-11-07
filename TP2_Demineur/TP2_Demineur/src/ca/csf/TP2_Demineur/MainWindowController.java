@@ -30,6 +30,7 @@ public class MainWindowController extends SimpleFXController implements
 	private int nbFlags;
 
 	private Clock clock;
+	private boolean isGameOver;
 
 	@FXML
 	private GridPane gridPane;
@@ -67,6 +68,7 @@ public class MainWindowController extends SimpleFXController implements
 
 	@FXML
 	public void newGame() {
+		isGameOver = false;
 		ImageView imagev = new ImageView(new Image("file:ressource/"
 				+ ButtonImage.SMILE.URL()));
 		btnNewGame.setGraphic(imagev);
@@ -83,11 +85,8 @@ public class MainWindowController extends SimpleFXController implements
 		}
 
 		game.newGame(difficulty);
-
 		nbFlags = difficulty.nbMine();
-
 		flagsCounter.setText(String.valueOf(nbFlags));
-
 		getSimpleFxStage().sizeToScene();
 	}
 
@@ -129,6 +128,8 @@ public class MainWindowController extends SimpleFXController implements
 		ImageView imagev = new ImageView(new Image("file:ressource/"
 				+ ButtonImage.SMILE_DEAD.URL()));
 		btnNewGame.setGraphic(imagev);
+		isGameOver = true;
+		gridPane.setDisable(true);
 	}
 
 	@FXML
@@ -149,7 +150,7 @@ public class MainWindowController extends SimpleFXController implements
 	}
 
 	public void onFirstClick() {
-		if (clock.getTimeInMiliseconds() == 0) {
+		if (clock.getTimeInMiliseconds() == 0 && !isGameOver) {
 			clock.start();
 		}
 	}
