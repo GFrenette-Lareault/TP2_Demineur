@@ -1,5 +1,8 @@
 package ca.csf.TP2_Demineur;
 
+import java.awt.event.ActionListener;
+
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -117,7 +120,7 @@ public class MainWindowController extends SimpleFXController implements
 		ImageView imagev = new ImageView(new Image("file:ressource/"
 				+ ButtonImage.SMILE_HAPPY.URL()));
 		btnNewGame.setGraphic(imagev);
-		gridPane.setDisable(true);
+
 	}
 
 	public void gameOver() {
@@ -126,7 +129,21 @@ public class MainWindowController extends SimpleFXController implements
 				+ ButtonImage.SMILE_DEAD.URL()));
 		btnNewGame.setGraphic(imagev);
 		isGameOver = true;
-		gridPane.setDisable(true);
+		int k = 0;
+		
+		ActionListener[] listeners;
+		for (int i = 0; i < difficulty.width(); i++) {
+			for (int j = 0; j < difficulty.height(); j++) {
+				k ++;
+				listeners[k] = (ActionListener) gameBoard[i][j].getOnAction();
+				for (ActionListener listenerToRemove : listeners)
+				{
+					gameBoard[i][j].removeEventHandler(ActionListener,listenerToRemove);
+				}
+
+			}
+		}
+		
 	}
 
 	@FXML
