@@ -18,7 +18,6 @@
 		<VBox prefHeight="68.0" BorderPane.alignment="CENTER">
 			<children>
 				<MenuBar prefHeight="25.0">
-
 					<menus>
 						<Menu mnemonicParsing="false" text="Partie">
 							<items>
@@ -53,15 +52,14 @@
 					</menus>
 				</MenuBar>
 
-				<Pane prefHeight="200.0" prefWidth="200.0"
-					style="-fx-background-color: B0B0B0;">
+				<HBox  prefHeight="200.0" prefWidth="200.0"
+					style="-fx-background-color: B0B0B0;" alignment="CENTER" spacing="10">
 					<children>
-						<Button layoutX="82.0" layoutY="9.0" mnemonicParsing="false"
-							text="Button" onAction="#newGame" />
-						<Label layoutX="14.0" layoutY="13.0" text="Flags" fx:id="flagsCounter" />
-						<Label layoutX="162.0" layoutY="13.0" text="Label" fx:id="timeLabel" />
+						<Label text="Flags" fx:id="flagsCounter" />
+						<Button mnemonicParsing="false" fx:id="btnNewGame" onAction="#newGame" />
+						<Label text="Label" fx:id="timeLabel" />
 					</children>
-				</Pane>
+				</HBox>
 			</children>
 		</VBox>
 	</top>

@@ -93,19 +93,19 @@ public class Game {
 			cells[cellPosX][cellPosY].setCellState();
 			if (cells[cellPosX][cellPosY].getCellState() == 1) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY,
+					gameEvent.buttonUpdate(cellPosX, cellPosY,
 							ButtonImage.FLAG);
 				}
 				nbFlags++;
 			} else if (cells[cellPosX][cellPosY].getCellState() == 2) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY,
+					gameEvent.buttonUpdate(cellPosX, cellPosY,
 							ButtonImage.QUESTION_MARK);
 				}
 				nbFlags--;
 			} else {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonRightClicked(cellPosX, cellPosY,
+					gameEvent.buttonUpdate(cellPosX, cellPosY,
 							ButtonImage.EMPTY);
 				}
 
@@ -152,7 +152,7 @@ public class Game {
 							}
 							for (GameEventHandler gameEvent : gameEventList) {
 								gameEvent
-										.buttonLeftClicked(
+										.buttonUpdate(
 												cellPosX,
 												cellPosY,
 												ButtonImage
@@ -165,7 +165,7 @@ public class Game {
 
 			} else if (cells[cellPosX][cellPosY].getNbMinesNear() > 0) {
 				for (GameEventHandler gameEvent : gameEventList) {
-					gameEvent.buttonLeftClicked(cellPosX, cellPosY, ButtonImage
+					gameEvent.buttonUpdate(cellPosX, cellPosY, ButtonImage
 							.getTypeFromInt(cells[cellPosX][cellPosY]
 									.getNbMinesNear()));
 				}
@@ -182,13 +182,13 @@ public class Game {
 				if (cells[i][j].getIsAMine()) {
 					if (cells[i][j].getIsRevealed()) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonLeftClicked(i, j,
+							gameEvent.buttonUpdate(i, j,
 									ButtonImage.MINE_RED);
 						}
 
 					} else if (cells[i][j].getCellState() == 0) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonLeftClicked(i, j,
+							gameEvent.buttonUpdate(i, j,
 									ButtonImage.MINE_NORMAL);
 						}
 					}
@@ -197,7 +197,7 @@ public class Game {
 						&& !cells[i][j].getIsAMine()) {
 					for (GameEventHandler gameEvent : gameEventList) {
 						gameEvent
-								.buttonLeftClicked(i, j, ButtonImage.MINE_FLAG);
+								.buttonUpdate(i, j, ButtonImage.MINE_FLAG);
 					}
 				}
 			}
@@ -215,7 +215,7 @@ public class Game {
 					if (cells[i][j].getIsAMine()) {
 						for (GameEventHandler gameEvent : gameEventList) {
 							gameEvent
-									.buttonRightClicked(i, j, ButtonImage.FLAG);
+									.buttonUpdate(i, j, ButtonImage.FLAG);
 						}
 					}
 				}
@@ -233,7 +233,7 @@ public class Game {
 				for (int j = 0; j < height; j++) {
 					if (cells[i][j].getIsAMine()) {
 						for (GameEventHandler gameEvent : gameEventList) {
-							gameEvent.buttonLeftClicked(i, j,
+							gameEvent.buttonUpdate(i, j,
 									ButtonImage.MINE_NORMAL);
 						}
 					}
@@ -246,7 +246,7 @@ public class Game {
 					if (cells[i][j].getIsAMine()) {
 						for (GameEventHandler gameEvent : gameEventList) {
 							gameEvent
-									.buttonLeftClicked(i, j, ButtonImage.EMPTY);
+									.buttonUpdate(i, j, ButtonImage.EMPTY);
 						}
 					}
 				}

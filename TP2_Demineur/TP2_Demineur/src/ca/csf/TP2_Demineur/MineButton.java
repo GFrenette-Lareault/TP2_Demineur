@@ -53,7 +53,7 @@ public class MineButton extends ToggleButton implements
 				buttonEvent.onRightClick(xPos, yPos);
 			}
 
-		} else {
+		} else if (event.getButton() != MouseButton.MIDDLE) {
 			setSelected(true);
 		}
 		event.consume();

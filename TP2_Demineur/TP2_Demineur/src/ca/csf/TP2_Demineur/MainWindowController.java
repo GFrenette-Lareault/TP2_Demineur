@@ -13,6 +13,8 @@ import ca.csf.TP2_Demineur.clock.Clock;
 import ca.csf.simpleFx.SimpleFXController;
 import ca.csf.simpleFx.events.WindowFocusEvent;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleGroup;
 
 public class MainWindowController extends SimpleFXController implements
 		ClockEventHandler, ButtonEventHandler, GameEventHandler,
@@ -33,6 +35,10 @@ public class MainWindowController extends SimpleFXController implements
 	private GridPane gridPane;
 	@FXML
 	private RadioMenuItem cheatBtn;
+	@FXML
+	private Button btnNewGame;
+	@FXML 
+	private ToggleGroup difficultyGroup;
 
 	public MainWindowController() {
 		game = new Game(this);
@@ -61,6 +67,9 @@ public class MainWindowController extends SimpleFXController implements
 
 	@FXML
 	public void newGame() {
+		ImageView imagev = new ImageView(new Image("file:ressource/"
+				+ ButtonImage.SMILE.URL()));
+		btnNewGame.setGraphic(imagev);
 		gridPane.getChildren().clear();
 		clock.reset();
 		gameBoard = new MineButton[difficulty.width()][difficulty.height()];
@@ -110,11 +119,16 @@ public class MainWindowController extends SimpleFXController implements
 
 	public void victory() {
 		clock.pause();
+		ImageView imagev = new ImageView(new Image("file:ressource/"
+				+ ButtonImage.SMILE_HAPPY.URL()));
+		btnNewGame.setGraphic(imagev);
 	}
 
 	public void gameOver() {
 		clock.pause();
-
+		ImageView imagev = new ImageView(new Image("file:ressource/"
+				+ ButtonImage.SMILE_DEAD.URL()));
+		btnNewGame.setGraphic(imagev);
 	}
 
 	@FXML
@@ -122,23 +136,16 @@ public class MainWindowController extends SimpleFXController implements
 		game.cheat();
 	}
 
-	public void buttonRightClicked(int x, int y, ButtonImage image) {
+	public void buttonUpdate(int x, int y, ButtonImage image) {
 
 		if (image != ButtonImage.EMPTY) {
 			ImageView imagev = new ImageView(new Image("file:ressource/"
 					+ image.URL()));
 
 			gameBoard[x][y].setGraphic(imagev);
-		}else{
+		} else {
 			gameBoard[x][y].setGraphic(null);
 		}
-	}
-
-	public void buttonLeftClicked(int x, int y, ButtonImage image) {
-		ImageView imagev = new ImageView(new Image("file:ressource/"
-				+ image.URL()));
-
-		gameBoard[x][y].setGraphic(imagev);
 	}
 
 	public void onFirstClick() {
