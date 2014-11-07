@@ -44,7 +44,7 @@ public class MineButton extends ToggleButton implements
 						buttonEvent.onLeftClick(xPos, yPos);
 						buttonEvent.onFirstClick();
 					}
-				}else{
+				} else {
 					setSelected(false);
 				}
 			}

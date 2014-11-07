@@ -31,7 +31,7 @@ public class MainWindowController extends SimpleFXController implements
 
 	@FXML
 	private GridPane gridPane;
-	@FXML 
+	@FXML
 	private RadioMenuItem cheatBtn;
 
 	public MainWindowController() {
@@ -72,9 +72,9 @@ public class MainWindowController extends SimpleFXController implements
 				gridPane.add(gameBoard[i][j], i, j);
 			}
 		}
-		
+
 		game.newGame(difficulty);
-		
+
 		nbFlags = difficulty.nbMine();
 
 		flagsCounter.setText(String.valueOf(nbFlags));
@@ -116,17 +116,22 @@ public class MainWindowController extends SimpleFXController implements
 		clock.pause();
 
 	}
+
 	@FXML
-	public void cheat(){
+	public void cheat() {
 		game.cheat();
 	}
 
 	public void buttonRightClicked(int x, int y, ButtonImage image) {
 
-		ImageView imagev = new ImageView(new Image("file:ressource/"
-				+ image.URL()));
+		if (image != ButtonImage.EMPTY) {
+			ImageView imagev = new ImageView(new Image("file:ressource/"
+					+ image.URL()));
 
-		gameBoard[x][y].setGraphic(imagev);
+			gameBoard[x][y].setGraphic(imagev);
+		}else{
+			gameBoard[x][y].setGraphic(null);
+		}
 	}
 
 	public void buttonLeftClicked(int x, int y, ButtonImage image) {
