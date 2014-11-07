@@ -15,10 +15,12 @@ public class MineButton extends ToggleButton implements
 
 	private final int xPos;
 	private final int yPos;
+	private boolean clickable;
 
 	public MineButton(int x, int y, ButtonEventHandler buttonEvent) {
 		xPos = x;
 		yPos = y;
+		clickable = true;
 		setMinWidth(25);
 		setMinHeight(25);
 		setMaxWidth(25);
@@ -39,7 +41,7 @@ public class MineButton extends ToggleButton implements
 
 	@Override
 	public void handle(MouseEvent event) {
-		if (isSelected()) {
+		if (isSelected() && clickable) {
 			if (event.getButton() == MouseButton.PRIMARY) {
 				for (ButtonEventHandler buttonEvent : buttonEventList) {
 					buttonEvent.onLeftClick(xPos, yPos);
@@ -63,5 +65,9 @@ public class MineButton extends ToggleButton implements
 		}
 		setSelected(true);
 
+	}
+	
+	public void setClickable(boolean i){
+		clickable = i;
 	}
 }
