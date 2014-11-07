@@ -23,23 +23,19 @@ public class MainWindowController extends SimpleFXController implements
 	private Game game;
 	private Difficulty difficulty;
 	private MineButton gameBoard[][];
-	@FXML
-	private Label timeLabel;
-	@FXML
-	private Label flagsCounter;
+	@FXML private Label timeLabel;
+	@FXML private Label flagsCounter;
 	private int nbFlags;
 
 	private Clock clock;
 	private boolean isGameOver;
 
-	@FXML
-	private GridPane gridPane;
-	@FXML
-	private RadioMenuItem cheatBtn;
-	@FXML
-	private Button btnNewGame;
-	@FXML 
-	private ToggleGroup difficultyGroup;
+	@FXML private GridPane gridPane;
+	@FXML private RadioMenuItem cheatBtn;
+	@FXML private Button btnNewGame;
+	
+	//inutiliser dans le code(que pour le FXML)
+	@FXML private ToggleGroup difficultyGroup;
 
 	public MainWindowController() {
 		game = new Game(this);
@@ -51,7 +47,6 @@ public class MainWindowController extends SimpleFXController implements
 	protected void onLoadedStage() {
 		getSimpleFxStage().setOnFocusChanged(this);
 	}
-
 	// Clock
 	public void initialize(Clock clock) {
 		this.clock = clock;
@@ -69,6 +64,7 @@ public class MainWindowController extends SimpleFXController implements
 	@FXML
 	public void newGame() {
 		isGameOver = false;
+		gridPane.setDisable(false);
 		ImageView imagev = new ImageView(new Image("file:ressource/"
 				+ ButtonImage.SMILE.URL()));
 		btnNewGame.setGraphic(imagev);
@@ -121,6 +117,7 @@ public class MainWindowController extends SimpleFXController implements
 		ImageView imagev = new ImageView(new Image("file:ressource/"
 				+ ButtonImage.SMILE_HAPPY.URL()));
 		btnNewGame.setGraphic(imagev);
+		gridPane.setDisable(true);
 	}
 
 	public void gameOver() {

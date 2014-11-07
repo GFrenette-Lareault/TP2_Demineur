@@ -19,7 +19,6 @@ public enum ButtonImage {
 	}
 
 	public String URL() {
-		System.out.println(System.getProperty("user.dir") + "/ressource/" + URL);
 		return URL;
 	}
 
