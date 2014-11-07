@@ -1,7 +1,6 @@
 package ca.csf.TP2_Demineur;
 
 import java.util.ArrayList;
-
 import ca.csf.TP2_Demineur.EventHandler.ButtonEventHandler;
 import javafx.event.EventHandler;
 import javafx.scene.control.ToggleButton;
@@ -15,12 +14,10 @@ public class MineButton extends ToggleButton implements
 
 	private final int xPos;
 	private final int yPos;
-	private boolean clickable;
 
 	public MineButton(int x, int y, ButtonEventHandler buttonEvent) {
 		xPos = x;
 		yPos = y;
-		clickable = true;
 		setMinWidth(25);
 		setMinHeight(25);
 		setMaxWidth(25);
@@ -28,7 +25,6 @@ public class MineButton extends ToggleButton implements
 
 		addEventHandler(MouseEvent.MOUSE_CLICKED, this);
 		buttonEventList.add(buttonEvent);
-		disarm();
 	}
 
 	public int getxPos() {
@@ -41,17 +37,22 @@ public class MineButton extends ToggleButton implements
 
 	@Override
 	public void handle(MouseEvent event) {
-		if (isSelected() && clickable) {
+		if (isSelected()) {
 			if (event.getButton() == MouseButton.PRIMARY) {
-				for (ButtonEventHandler buttonEvent : buttonEventList) {
-					buttonEvent.onLeftClick(xPos, yPos);
-					buttonEvent.onFirstClick();
+				if (getGraphic() == null) {
+					for (ButtonEventHandler buttonEvent : buttonEventList) {
+						buttonEvent.onLeftClick(xPos, yPos);
+						buttonEvent.onFirstClick();
+					}
+				}else{
+					setSelected(false);
 				}
 			}
 		} else if (event.getButton() == MouseButton.SECONDARY) {
 			for (ButtonEventHandler buttonEvent : buttonEventList) {
 				buttonEvent.onRightClick(xPos, yPos);
 			}
+
 		} else {
 			setSelected(true);
 		}
@@ -66,8 +67,5 @@ public class MineButton extends ToggleButton implements
 		setSelected(true);
 
 	}
-	
-	public void setClickable(boolean i){
-		clickable = i;
-	}
+
 }
