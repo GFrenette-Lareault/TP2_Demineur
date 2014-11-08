@@ -1,13 +1,15 @@
 package ca.csf.TP2_Demineur;
 
 import java.awt.event.ActionListener;
-
+import java.awt.event.InputEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import ca.csf.TP2_Demineur.EventHandler.ButtonEventHandler;
 import ca.csf.TP2_Demineur.EventHandler.ClockEventHandler;
@@ -19,26 +21,31 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleGroup;
 
-public class MainWindowController extends SimpleFXController implements
-		ClockEventHandler, ButtonEventHandler, GameEventHandler,
-		EventHandler<WindowFocusEvent> {
+public class MainWindowController extends SimpleFXController implements ClockEventHandler, ButtonEventHandler,
+		GameEventHandler, EventHandler<WindowFocusEvent> {
 
 	private Game game;
 	private Difficulty difficulty;
 	private MineButton gameBoard[][];
-	@FXML private Label timeLabel;
-	@FXML private Label flagsCounter;
+	@FXML
+	private Label timeLabel;
+	@FXML
+	private Label flagsCounter;
 	private int nbFlags;
 
 	private Clock clock;
 	private boolean isGameOver;
 
-	@FXML private GridPane gridPane;
-	@FXML private RadioMenuItem cheatBtn;
-	@FXML private Button btnNewGame;
-	
-	//inutiliser dans le code(que pour le FXML)
-	@FXML private ToggleGroup difficultyGroup;
+	@FXML
+	private GridPane gridPane;
+	@FXML
+	private RadioMenuItem cheatBtn;
+	@FXML
+	private Button btnNewGame;
+
+	// inutiliser dans le code(que pour le FXML)
+	@FXML
+	private ToggleGroup difficultyGroup;
 
 	public MainWindowController() {
 		game = new Game(this);
@@ -50,6 +57,7 @@ public class MainWindowController extends SimpleFXController implements
 	protected void onLoadedStage() {
 		getSimpleFxStage().setOnFocusChanged(this);
 	}
+
 	// Clock
 	public void initialize(Clock clock) {
 		this.clock = clock;
@@ -68,8 +76,7 @@ public class MainWindowController extends SimpleFXController implements
 	public void newGame() {
 		isGameOver = false;
 		gridPane.setDisable(false);
-		ImageView imagev = new ImageView(new Image("file:ressource/"
-				+ ButtonImage.SMILE.URL()));
+		ImageView imagev = new ImageView(new Image("file:ressource/" + ButtonImage.SMILE.URL()));
 		btnNewGame.setGraphic(imagev);
 		gridPane.getChildren().clear();
 		clock.reset();
@@ -117,33 +124,37 @@ public class MainWindowController extends SimpleFXController implements
 
 	public void victory() {
 		clock.pause();
-		ImageView imagev = new ImageView(new Image("file:ressource/"
-				+ ButtonImage.SMILE_HAPPY.URL()));
+		ImageView imagev = new ImageView(new Image("file:ressource/" + ButtonImage.SMILE_HAPPY.URL()));
 		btnNewGame.setGraphic(imagev);
-
+		removeBtnEvent();
 	}
 
 	public void gameOver() {
 		clock.pause();
-		ImageView imagev = new ImageView(new Image("file:ressource/"
-				+ ButtonImage.SMILE_DEAD.URL()));
+		ImageView imagev = new ImageView(new Image("file:ressource/" + ButtonImage.SMILE_DEAD.URL()));
 		btnNewGame.setGraphic(imagev);
 		isGameOver = true;
-		int k = 0;
-		
-		ActionListener[] listeners;
+		removeBtnEvent();
+	}
+
+	private void removeBtnEvent() {
+		EventHandler<MouseEvent> filter = new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				// pour filtrer les events et empecher d'appeler les autre
+				event.consume();
+
+			}
+		};
+
 		for (int i = 0; i < difficulty.width(); i++) {
 			for (int j = 0; j < difficulty.height(); j++) {
-				k ++;
-				listeners[k] = (ActionListener) gameBoard[i][j].getOnAction();
-				for (ActionListener listenerToRemove : listeners)
-				{
-					gameBoard[i][j].removeEventHandler(ActionListener,listenerToRemove);
-				}
+				gameBoard[i][j].addEventFilter(MouseEvent.ANY, filter);
+				;
 
 			}
 		}
-		
 	}
 
 	@FXML
@@ -154,8 +165,7 @@ public class MainWindowController extends SimpleFXController implements
 	public void buttonUpdate(int x, int y, ButtonImage image) {
 
 		if (image != ButtonImage.EMPTY) {
-			ImageView imagev = new ImageView(new Image("file:ressource/"
-					+ image.URL()));
+			ImageView imagev = new ImageView(new Image("file:ressource/" + image.URL()));
 
 			gameBoard[x][y].setGraphic(imagev);
 		} else {
