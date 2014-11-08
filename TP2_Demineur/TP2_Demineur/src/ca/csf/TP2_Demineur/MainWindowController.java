@@ -1,15 +1,11 @@
 package ca.csf.TP2_Demineur;
 
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import ca.csf.TP2_Demineur.EventHandler.ButtonEventHandler;
 import ca.csf.TP2_Demineur.EventHandler.ClockEventHandler;
@@ -126,7 +122,7 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 		clock.pause();
 		ImageView imagev = new ImageView(new Image("file:ressource/" + ButtonImage.SMILE_HAPPY.URL()));
 		btnNewGame.setGraphic(imagev);
-		removeBtnEvent();
+		removeAllBtnEvent();
 	}
 
 	public void gameOver() {
@@ -134,10 +130,10 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 		ImageView imagev = new ImageView(new Image("file:ressource/" + ButtonImage.SMILE_DEAD.URL()));
 		btnNewGame.setGraphic(imagev);
 		isGameOver = true;
-		removeBtnEvent();
+		removeAllBtnEvent();
 	}
 
-	private void removeBtnEvent() {
+	private void removeAllBtnEvent() {
 		EventHandler<MouseEvent> filter = new EventHandler<MouseEvent>() {
 
 			@Override

@@ -7,8 +7,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
-public class MineButton extends ToggleButton implements
-		EventHandler<MouseEvent> {
+public class MineButton extends ToggleButton implements EventHandler<MouseEvent> {
 
 	private ArrayList<ButtonEventHandler> buttonEventList = new ArrayList<ButtonEventHandler>();
 

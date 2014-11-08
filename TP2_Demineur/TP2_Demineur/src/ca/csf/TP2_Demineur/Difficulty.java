@@ -16,11 +16,11 @@ enum Difficulty {
 	public int height() {
 		return height;
 	}
-	
+
 	public int width() {
 		return width;
 	}
-	
+
 	public int nbMine() {
 		return nbMine;
 	}

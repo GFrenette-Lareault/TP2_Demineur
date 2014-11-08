@@ -15,12 +15,9 @@ public class Main extends SimpleFXApplication {
 	public void start() {
 		try {
 			MainWindowController controller;
-			SimpleFXScene simpleFXScene = new SimpleFXScene(
-					MainWindowController.class.getResource("MainWindow.fxml"),
-					MainWindowController.class.getResource("application.css"),
-					controller = new MainWindowController());
-			SimpleFXStage simpleFXStage = new SimpleFXStage("Demineur",
-					StageStyle.DECORATED, simpleFXScene, this);
+			SimpleFXScene simpleFXScene = new SimpleFXScene(MainWindowController.class.getResource("MainWindow.fxml"),
+					MainWindowController.class.getResource("application.css"), controller = new MainWindowController());
+			SimpleFXStage simpleFXStage = new SimpleFXStage("Demineur", StageStyle.DECORATED, simpleFXScene, this);
 			simpleFXStage.setResizable(false);
 			controller.newGame();
 			simpleFXStage.show();
