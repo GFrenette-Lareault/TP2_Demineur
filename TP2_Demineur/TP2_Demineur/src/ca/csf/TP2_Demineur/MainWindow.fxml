@@ -22,7 +22,7 @@
 						<Menu mnemonicParsing="false" text="Partie">
 							<items>
 								<MenuItem mnemonicParsing="false" text="Nouveau"
-									onAction="#newGame" />
+									onAction="#newGame" accelerator="F2"/>
 							</items>
 							<SeparatorMenuItem />
 							<items>
