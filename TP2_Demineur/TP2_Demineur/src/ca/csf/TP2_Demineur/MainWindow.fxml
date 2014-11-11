@@ -19,10 +19,10 @@
 			<children>
 				<MenuBar prefHeight="25.0">
 					<menus>
-						<Menu mnemonicParsing="false" text="Partie">
+						<Menu text="Partie">
 							<items>
-								<MenuItem mnemonicParsing="false" text="Nouveau"
-									onAction="#newGame" accelerator="F2"/>
+								<MenuItem text="Nouveau" onAction="#newGame"
+									accelerator="F2" />
 							</items>
 							<SeparatorMenuItem />
 							<items>
@@ -39,24 +39,28 @@
 							<SeparatorMenuItem />
 							<items>
 								<RadioMenuItem text="Tricher" selected="false"
-									onAction="#cheat" fx:id="cheatBtn"/>
+									onAction="#cheat" fx:id="cheatBtn" />
+							</items>
+							<SeparatorMenuItem />
+							<items>
+								<MenuItem text="Meilleurs temps" onAction="#bestScore" />
 							</items>
 						</Menu>
 
-						<Menu mnemonicParsing="false" text="?">
+						<Menu text="?">
 							<items>
-								<MenuItem mnemonicParsing="false" text="Aide" />
-								<MenuItem mnemonicParsing="false" text="À propos" />
+								<MenuItem text="Aide" onAction="#help"/>
+								<MenuItem text="À propos" onAction="#about"/>
 							</items>
 						</Menu>
 					</menus>
 				</MenuBar>
 
-				<HBox  prefHeight="200.0" prefWidth="200.0"
+				<HBox prefHeight="200.0" prefWidth="200.0"
 					style="-fx-background-color: B0B0B0;" alignment="CENTER" spacing="10">
 					<children>
 						<Label text="Flags" fx:id="flagsCounter" />
-						<Button mnemonicParsing="false" fx:id="btnNewGame" onAction="#newGame" />
+						<Button fx:id="btnNewGame" onAction="#newGame" />
 						<Label text="Label" fx:id="timeLabel" />
 					</children>
 				</HBox>
@@ -64,8 +68,6 @@
 		</VBox>
 	</top>
 	<center>
-		<GridPane fx:id="gridPane">
-
-		</GridPane>
+		<GridPane fx:id="gridPane" />
 	</center>
 </BorderPane>

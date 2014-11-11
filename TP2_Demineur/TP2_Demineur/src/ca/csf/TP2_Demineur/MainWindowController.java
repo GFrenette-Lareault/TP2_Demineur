@@ -20,6 +20,8 @@ import javafx.scene.control.ToggleGroup;
 public class MainWindowController extends SimpleFXController implements ClockEventHandler, ButtonEventHandler,
 		GameEventHandler, EventHandler<WindowFocusEvent> {
 
+	private static final String RESSOURCE_PATH = "file:ressource/";
+	
 	private Game game;
 	private Difficulty difficulty;
 	private MineButton gameBoard[][];
@@ -72,20 +74,18 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 	public void newGame() {
 		isGameOver = false;
 		gridPane.setDisable(false);
-		ImageView imagev = new ImageView(new Image("file:ressource/" + ButtonImage.SMILE.URL()));
+		ImageView imagev = new ImageView(new Image(RESSOURCE_PATH + ButtonImage.SMILE.URL()));
 		btnNewGame.setGraphic(imagev);
 		gridPane.getChildren().clear();
 		clock.reset();
 		gameBoard = new MineButton[difficulty.width()][difficulty.height()];
 
 		for (int i = 0; i < difficulty.width(); i++) {
-
 			for (int j = 0; j < difficulty.height(); j++) {
 				gameBoard[i][j] = new MineButton(i, j, this);
 				gridPane.add(gameBoard[i][j], i, j);
 			}
 		}
-
 		game.newGame(difficulty);
 		nbFlags = difficulty.nbMine();
 		flagsCounter.setText(String.valueOf(nbFlags));
@@ -120,14 +120,14 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 
 	public void victory() {
 		clock.pause();
-		ImageView imagev = new ImageView(new Image("file:ressource/" + ButtonImage.SMILE_HAPPY.URL()));
+		ImageView imagev = new ImageView(new Image(RESSOURCE_PATH + ButtonImage.SMILE_HAPPY.URL()));
 		btnNewGame.setGraphic(imagev);
 		removeAllBtnEvent();
 	}
 
 	public void gameOver() {
 		clock.pause();
-		ImageView imagev = new ImageView(new Image("file:ressource/" + ButtonImage.SMILE_DEAD.URL()));
+		ImageView imagev = new ImageView(new Image(RESSOURCE_PATH + ButtonImage.SMILE_DEAD.URL()));
 		btnNewGame.setGraphic(imagev);
 		isGameOver = true;
 		removeAllBtnEvent();
@@ -135,20 +135,16 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 
 	private void removeAllBtnEvent() {
 		EventHandler<MouseEvent> filter = new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent event) {
 				// pour filtrer les events et empecher d'appeler les autre
 				event.consume();
-
 			}
 		};
-
 		for (int i = 0; i < difficulty.width(); i++) {
 			for (int j = 0; j < difficulty.height(); j++) {
 				gameBoard[i][j].addEventFilter(MouseEvent.ANY, filter);
 				;
-
 			}
 		}
 	}
@@ -161,7 +157,7 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 	public void buttonUpdate(int x, int y, ButtonImage image) {
 
 		if (image != ButtonImage.EMPTY) {
-			ImageView imagev = new ImageView(new Image("file:ressource/" + image.URL()));
+			ImageView imagev = new ImageView(new Image(RESSOURCE_PATH + image.URL()));
 
 			gameBoard[x][y].setGraphic(imagev);
 		} else {
@@ -195,5 +191,21 @@ public class MainWindowController extends SimpleFXController implements ClockEve
 		} else if (event.getEventType() == WindowFocusEvent.LOOSE_FOCUS) {
 			clock.pause();
 		}
+	}
+
+	@FXML 
+	public void bestScore() {
+		
+		
+	}
+	@FXML 
+	public void help() {
+		
+		
+	}
+	@FXML 
+	public void about() {
+		
+		
 	}
 }
