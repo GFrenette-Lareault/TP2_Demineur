@@ -5,13 +5,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-   <center>
-      <Pane prefHeight="312.0" prefWidth="435.0" style="-fx-background-color: #C8C8C8;" BorderPane.alignment="CENTER">
+<BorderPane prefHeight="238.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.csf.TP2_Demineur.ScoresWindowController">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="33.0" prefWidth="372.0" spacing="50" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="201.0" layoutY="274.0" mnemonicParsing="false" text="OK" />
+            <Button mnemonicParsing="false" text="Effacer les temps" />
+            <Button mnemonicParsing="false" text="OK" />
          </children>
-      </Pane>
+      </HBox>
+   </bottom>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" alignment="CENTER" spacing="10">
+         		<children>
+            		<Label text="Label" fx:id="lblDebutant" />
+           			 <Label text="Label" fx:id="lblIntermediaire" />
+           			 <Label text="Label" fx:id="lblExpert" />
+                </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" alignment="CENTER" spacing="10">
+               <children>
+                  <Label text="Label" fx:id="lblScoreDebutant" />
+                  <Label text="Label" fx:id="lblScoreIntermediaire" />
+                  <Label text="Label" fx:id="lblScoreExpert" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" alignment="CENTER" spacing="10">
+               <children>
+                  <Label text="Label" fx:id="lblNomDebutant" />
+                  <Label text="Label" fx:id="lblNomIntermediaire" />
+                  <Label text="Label" fx:id="lblNomExpert" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </center>
 </BorderPane>

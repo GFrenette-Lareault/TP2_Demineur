@@ -1,0 +1,9 @@
+Débutant
+999
+OP_Wally
+Intermédiaire
+999
+OP_Benjamin
+Expert
+999
+OP_Benjamin
