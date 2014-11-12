@@ -1,14 +1,19 @@
 package ca.csf.TP2_Demineur;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import ca.csf.simpleFx.SimpleFXController;
+import ca.csf.simpleFx.SimpleFXStage;
+import ca.csf.simpleFx.dialogs.SimpleFXDialogChoiceSet;
+import ca.csf.simpleFx.dialogs.SimpleFXDialogIcon;
+import ca.csf.simpleFx.dialogs.SimpleFXDialogResult;
+import ca.csf.simpleFx.dialogs.SimpleFXDialogs;
 
 public class ScoresWindowController extends SimpleFXController {
 	
@@ -40,6 +45,8 @@ public class ScoresWindowController extends SimpleFXController {
 	
 	FileReader fileReader;
 	BufferedReader textReader; 
+	String textFileText;
+	SimpleFXStage stageParent;
 	
 	public ScoresWindowController() {
 		try {
@@ -70,27 +77,55 @@ public class ScoresWindowController extends SimpleFXController {
 		textReader.close();
 	}
 	
-	public void checkScore(Difficulty difficulty, int score) throws IOException {
+	public void checkScore(Difficulty difficulty, int score, SimpleFXStage stage) throws IOException {
+		
+		stageParent = stage;
 		switch (difficulty) {
 		case DEBUTANT:
-			if (score > Integer.parseInt(textScoreLines[1])) {
+			if (score < Integer.parseInt(textScoreLines[1])) {
 				setHighScore(difficulty, score);
 			}	
 			break;
-
+		case EXPERT:
+			break;
+		case INTERMEDIAIRE:
+			break;
 		default:
 			break;
+			
 		}
 	}
 	
 	private void setHighScore(Difficulty difficulty, int newHighScore) throws IOException {
 		FileWriter fileWriter = new FileWriter(RESSOURCE_PATH + "Scores.txt");
-		PrintWriter lineWriter = new PrintWriter(fileWriter);
+		BufferedWriter buffWriter = new BufferedWriter(fileWriter);
+		String name = SimpleFXDialogs.showInputBox("Nouveau meilleur score!", "Veuillez entrer votre nom : ", stageParent);
+
+		StringBuilder fileContent = new StringBuilder();
 		
-		lineWriter.printf("%s" + "%n", "Fuck off");
-		lineWriter.printf("%s" + "%n", "Fuck off");
+		switch (difficulty) {
+		case DEBUTANT:
+			textScoreLines[1] = String.valueOf(newHighScore);
+			textScoreLines[2] = name;
+			break;
+		case INTERMEDIAIRE:
+			textScoreLines[4] = String.valueOf(newHighScore);
+			textScoreLines[5] = name;
+			break;
+		case EXPERT:
+			textScoreLines[7] = String.valueOf(newHighScore);
+			textScoreLines[8] = name;
+			break;
+		}
 		
-		lineWriter.close();
+		fileContent.append(textScoreLines[0] + "\r" + "\n" + 
+				textScoreLines[1] + "\r" + "\n" + textScoreLines[2] + "\r" + "\n" + 
+				textScoreLines[3] + "\r" + "\n" + textScoreLines[4] + "\r" + "\n" + 
+				textScoreLines[5] + "\r" + "\n" + textScoreLines[6] + "\r" + "\n" + 
+				textScoreLines[7] + "\r" + "\n" + textScoreLines[8]);
+		buffWriter.write(fileContent.toString());
+		buffWriter.close();
+		SimpleFXDialogs.showMessageBox("Bravo", "Votre nom a été ajouté aux meilleurs score!", SimpleFXDialogIcon.WARNING, SimpleFXDialogChoiceSet.OK, SimpleFXDialogResult.OK, stageParent);
 	}
 	
 }

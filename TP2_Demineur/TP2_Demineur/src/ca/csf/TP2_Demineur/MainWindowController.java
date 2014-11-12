@@ -1,6 +1,7 @@
 package ca.csf.TP2_Demineur;
 
 import java.io.IOException;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
@@ -61,6 +62,7 @@ public class MainWindowController extends SimpleFXController implements
 		game = new Game(this);
 		difficulty = Difficulty.DEBUTANT;
 		initialize(new Clock(0, 1000));
+
 	}
 
 	@Override
@@ -135,7 +137,7 @@ public class MainWindowController extends SimpleFXController implements
 	public void victory() {
 		clock.pause();
 		try {
-			controller.checkScore(this.difficulty, (clock.getTimeInMiliseconds()/1000));
+			controller.checkScore(this.difficulty, (clock.getTimeInMiliseconds()/1000), getSimpleFxStage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

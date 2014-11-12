@@ -45,6 +45,19 @@ public class Game {
 			cheat();
 		}
 	}
+	
+	public Boolean isNewGameOk() {
+		if (this.height != 0 && this.width != 0 && this.nbMines != 0 && this.nbFlags != 0 && cells[8][9] != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public Cell[][] getCell() {
+		return cells;
+	}
 
 	private void createMine(int nbMine) {
 

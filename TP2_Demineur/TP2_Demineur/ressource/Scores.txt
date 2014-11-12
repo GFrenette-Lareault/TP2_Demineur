@@ -1,7 +1,7 @@
-Débutant
-999
-OP_Wally
-Intermédiaire
+Debutant
+6
+Monsieur Cool
+Intermediaire
 999
 OP_Benjamin
 Expert
