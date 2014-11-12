@@ -10,11 +10,10 @@ public class HelpControler extends SimpleFXController{
 
 	    @FXML
 	    public void okClick(){
-	    	
+	    	getSimpleFxStage().close();
 	    }
-
 		@Override
-		protected void onLoadedScene() {
-			webViewHelp.getEngine().load(getClass().getResource("ressource/help.html").toExternalForm());
+		protected void onLoadedStage() {
+			webViewHelp.getEngine().load(getClass().getResource("help.html").toExternalForm());
 		}
 }
