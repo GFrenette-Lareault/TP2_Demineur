@@ -1,9 +1,9 @@
-Debutant
-6
-Monsieur Cool
-Intermediaire
+Débutant
 999
-OP_Benjamin
+Nom1
+Intermédiaire
+999
+Nom2
 Expert
 999
-OP_Benjamin
+Nom3

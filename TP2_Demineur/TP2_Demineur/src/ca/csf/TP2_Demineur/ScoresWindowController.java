@@ -128,4 +128,29 @@ public class ScoresWindowController extends SimpleFXController {
 		SimpleFXDialogs.showMessageBox("Bravo", "Votre nom a été ajouté aux meilleurs score!", SimpleFXDialogIcon.WARNING, SimpleFXDialogChoiceSet.OK, SimpleFXDialogResult.OK, stageParent);
 	}
 	
+	public void resetScores() throws IOException {
+		textScoreLines[0] = "Débutant";
+		textScoreLines[1] = "999";
+		textScoreLines[2] = "Nom1";
+		textScoreLines[3] = "Intermédiaire";
+		textScoreLines[4] = "999";
+		textScoreLines[5] = "Nom2";
+		textScoreLines[6] = "Expert";
+		textScoreLines[7] = "999";
+		textScoreLines[8] = "Nom3";
+		
+		FileWriter fileWriter = new FileWriter(RESSOURCE_PATH + "Scores.txt");
+		BufferedWriter buffWriter = new BufferedWriter(fileWriter);
+		StringBuilder fileContent = new StringBuilder();
+		fileContent.append(textScoreLines[0] + "\r" + "\n" + 
+				textScoreLines[1] + "\r" + "\n" + textScoreLines[2] + "\r" + "\n" + 
+				textScoreLines[3] + "\r" + "\n" + textScoreLines[4] + "\r" + "\n" + 
+				textScoreLines[5] + "\r" + "\n" + textScoreLines[6] + "\r" + "\n" + 
+				textScoreLines[7] + "\r" + "\n" + textScoreLines[8]);
+		buffWriter.write(fileContent.toString());
+		buffWriter.close();
+		SimpleFXDialogs.showMessageBox("Réussis", "Le tableau des meilleurs scores a été remis à zéro.", SimpleFXDialogIcon.WARNING, SimpleFXDialogChoiceSet.OK, SimpleFXDialogResult.OK, getSimpleFxStage());
+		
+	}
+	
 }
