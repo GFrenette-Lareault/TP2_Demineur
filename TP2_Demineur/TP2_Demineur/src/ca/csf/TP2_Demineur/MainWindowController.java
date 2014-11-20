@@ -32,7 +32,7 @@ public class MainWindowController extends SimpleFXController implements
 
 	private static final String RESSOURCE_PATH = "file:ressource/";
 	private static final String ABOUT_TITLE = "À propos";
-	private static final String ABOUT_TEXT = "Démineur \r \n Par \r\n Francois Chantal, \r\n Bruno Cyr, \r\n Grabriel Frenette-L.";
+	private static final String ABOUT_TEXT = "Démineur \r \n Par \r\n Francois Chantal, \r\n Bruno Cyr, \r\n Gabriel Frenette-L.";
 
 	private Game game;
 	private Difficulty difficulty;
